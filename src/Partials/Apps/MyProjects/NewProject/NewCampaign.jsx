@@ -112,34 +112,34 @@ const NewProject = () => {
 
     const get_PendingCampaigns = async () => {
         const pendingCampaigns = await getPendingCampaigns();
-        console.log("pendingCampaigns: ",pendingCampaigns);
+        console.log("pendingCampaigns: ",JSON.stringify(pendingCampaigns));
     }
     const get_ActiveCampaignUIDs = async () => {
         const activeCampaignUIDs = await getActiveCampaignUIDs();
-        console.log("activeCampaignUIDs: ",activeCampaignUIDs);
+        console.log("activeCampaignUIDs: ",JSON.stringify(activeCampaignUIDs));
     
     }
     const get_ExpiredCampaignUIDs = async () => {
         const expiredCampaignUIDs = await getExpiredCampaignUIDs();
-        console.log("expiredCampaignUIDs: ",expiredCampaignUIDs);
+        console.log("expiredCampaignUIDs: ",JSON.stringify(expiredCampaignUIDs));
     
     }
     const get_ReadyFroPaymentCampaignUIDs = async () => {
         const readyForPaymentCampaignUIDs = await getReadyFroPaymentCampaignUIDs();
-        console.log("readyForPaymentCampaignUIDs: ",readyForPaymentCampaignUIDs);
+        console.log("readyForPaymentCampaignUIDs: ",JSON.stringify(readyForPaymentCampaignUIDs));
     }
     const get_CampaignSpecs = async () => {
-        let uuid= "1";
+        let uuid= "0";
         const campaignSpecs = await get_Campaign_Specs(uuid);
         console.log("campaignSpecs: ",campaignSpecs);
     }
     const get_CampaignPointMarking = async () => {
-        let uuid= "1";
+        let uuid= "0";
         const campaignPointMarking = await get_Campaign_PointMarking(uuid);
         console.log("campaignPointMarking: ",campaignPointMarking);
     }
     const get_Campaignplatformfees = async () => {
-        let uuid= "1";
+        let uuid= "0";
         const campaignplatformfees = await get_Campaign_platform_fees(uuid);
         console.log("campaignplatformfees: ",campaignplatformfees);
     
@@ -212,7 +212,7 @@ const NewProject = () => {
         <div className="px-4 py-3 page-body">
             <form className="row g-3">
                 <div className="col-12" style={{color:"#06E443"}}>
-                    <h3>Create Campaign</h3>
+                    <h3>New Campaign</h3>
                 </div>
                 <div className="col-sm-6 col-12">
                     <div className="form-floating">
@@ -425,7 +425,7 @@ const NewProject = () => {
                     >Cancel</button>
                     <button type="button" className="btn btn-primary"
                         onClick = { () => registerCampaign() }
-                    >Create Project</button>
+                    >Create Campaign</button>
                 </div>
 
 
@@ -441,42 +441,42 @@ const NewProject = () => {
 
                 <h5>Admin helper</h5>
                 <div className="col-12">
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1" 
                         onClick = { () => get_PendingCampaigns() }
                     >getPendingCampaigns
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_ActiveCampaignUIDs() }
                     >getActiveCampaignUIDs
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_ExpiredCampaignUIDs() }
                     >getExpiredCampaignUIDs
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_ReadyFroPaymentCampaignUIDs() }
                     >getReadyFroPaymentCampaignUIDs
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_CampaignSpecs() }
                     >get_Campaign_Specs
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_CampaignPointMarking() }
                     >get_Campaign_PointMarking
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_Campaignplatformfees() }
                     >get_Campaign_platform__fees
                     </button>
 
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                    <button type="button" className="btn btn-secondary me-1"  
                         onClick = { () => get_withdrawableplatformfees() }
                     >get_withdrawable_platform_fees
                     </button>

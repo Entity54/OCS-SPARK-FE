@@ -178,7 +178,7 @@ const getReadyFroPaymentCampaignUIDs = async () => {
 }
 
 const get_Campaign_Specs = async (campaign_uuid) => {
-	const campaigneSpecs =  await CampaignManager_admin.campaigns(campaign_uuid);
+	const campaigneSpecs =  await CampaignManager_admin.getCampaign(campaign_uuid);
 	console.log(`campaigneSpecs: `,campaigneSpecs);
 	return campaigneSpecs;
 }
