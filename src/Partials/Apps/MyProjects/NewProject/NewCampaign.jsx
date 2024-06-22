@@ -10,7 +10,6 @@ import "select2/dist/css/select2.css";
 
 
 import { createCampaign, 
-    userAddress,
     getAccountInfo,
     getPendingCampaigns,
     getActiveCampaignUIDs,
@@ -27,7 +26,7 @@ import { createCampaign,
 
 const NewProject = () => {
 
-    const { theme, toggleTheme, contextAccount  } = useContext(SparkContext);
+    const { contextAccount  } = useContext(SparkContext);
 
     const dateInputSTARTRef = useRef(null);
     const dateInputENDRef = useRef(null);
@@ -158,9 +157,6 @@ const NewProject = () => {
     useEffect(() => {
         setCampaignEthereumAddress(contextAccount);
     }, [contextAccount]);    
-    // useEffect(() => {
-    //     setCampaignEthereumAddress(userAddress);
-    // }, []);    
 
    
     useEffect(() => {
@@ -493,12 +489,6 @@ const NewProject = () => {
                 </div>
 
 
-<div style={{ background: theme === 'light' ? '#fff' : '#333', color: theme === 'light' ? '#000' : '#fff' }}>
-      <h1>{`The current theme is ${theme}`}</h1>
-      <button type="button" onClick={toggleTheme}>
-        Toggle Theme
-      </button>
-    </div>
 <br/>
 <br/>
 <br/>

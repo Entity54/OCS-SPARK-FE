@@ -24,7 +24,6 @@ const CommonHeader = () => {
 
   const { broadcast  } = useContext(SparkContext);
 
-
   const [connectedAccount, setConnectedAccount]   = useState("");
   const [accountBalance, setAccountBalance]   = useState(0);
 
