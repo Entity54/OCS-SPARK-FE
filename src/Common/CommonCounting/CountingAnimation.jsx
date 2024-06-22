@@ -46,7 +46,7 @@ const CountingAnimation = ({ start, separator, currency, end, duration }) => {
       return (numericValue / 1000000).toFixed(1) + ' M';
     }
   
-    return numericValue.toFixed(0);
+    return numericValue.toFixed(8);
   };  
 
   return (

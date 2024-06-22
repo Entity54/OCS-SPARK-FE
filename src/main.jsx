@@ -9,12 +9,16 @@ import 'weather-icons/css/weather-icons.css';
 import 'prismjs/themes/prism.css';
 import '../src/assets/scss/styles.scss';
 
+import { SparkProvider } from '@SparkContext';
+
 import App from './App';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <SparkProvider>
+        <App />
+      </SparkProvider>
     </BrowserRouter>
   </Provider>
 );

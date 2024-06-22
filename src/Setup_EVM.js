@@ -114,11 +114,12 @@ const setupContracts = async () => {
 
 let provider_Admin;
 let CampaignManager_admin, InfuencersManager_admin;
-let CampaignManager_user, InfuencersManager_user, userChainName;
+let CampaignManager_user, InfuencersManager_user, userChainName, userAddress;
 // SETTING UP USER CHAIN CONNECTION REFERENCES TO SMART CONTRACTS
 const setup_user_chain = async (wallet, chainId, walletAddress) => {
         const userChain 		= chainSpecs[chainId];
         userChainName     = chainSpecs[chainId].chainName;
+        userAddress = walletAddress;
         console.log(`SETUP_EVM User Chain Selected ===------> : userChainName: ${userChainName} chainId: ${chainId} walletAddress: ${walletAddress}`);
                 
         // System References and Contracts
@@ -147,6 +148,7 @@ const getAccountInfo = async (account_address) => {
 		balanceETH = ethers.utils.formatEther(balanceWEI)              // '0.182334002436162568'
 		blockNumber = await provider_Admin.getBlockNumber();
 	}
+    console.log(`getAccountInfo account_address: ${account_address} nonce: ${nonce} balanceWEI: ${balanceWEI} balanceETH: ${balanceETH} blockNumber: ${blockNumber}`);
     return {nonce, balanceWEI, balanceETH, blockNumber};
 }
 //#endregion
@@ -187,13 +189,13 @@ const get_Campaign_PointMarking = async (campaign_uuid) => {
 	return campaignPointMarking;
 }
 
-const get_Campaign_platform__fees = async (campaign_uuid) => {
+const get_Campaign_platform_fees = async (campaign_uuid) => {
 	const campaignPlatformFees =  await CampaignManager_admin.platform_campaign_fees(campaign_uuid);
 	console.log(`campaignPlatformFees: `,campaignPlatformFees);
 	return campaignPlatformFees;
 }
 
-const get_withdrawable_platform__fees = async () => {
+const get_withdrawable_platform_fees = async () => {
     const CampaignManager_Address = deploymentData["CampaignManager"][userChainName]["address"]
 	const withdrawableAmount =  await CampaignManager_admin.platform_Balance(CampaignManager_Address);
 	console.log(`withdrawableAmount: `,withdrawableAmount);
@@ -205,11 +207,11 @@ const get_withdrawable_platform__fees = async () => {
 //#endregion READ
 
 //#region WRITE
-const createCampaign = async (_title,_description,_campaign_Fid,_startTime,_endTime,_influencerActionsPointsArray) => {
+const createCampaign = async (_title,_description,_campaign_Fid,_startTime,_endTime,_influencerActionsPointsArray,campaignBudget) => {
 	return new Promise (async (resolve,reject) => {
-		console.log(`_title: ${_title} _description: ${_description} _campaign_Fid: ${_campaign_Fid} _startTime: ${_startTime} _endTime: ${_endTime} _influencerActionsPointsArray: `,_influencerActionsPointsArray);
+		console.log(`_title: ${_title} _description: ${_description} _campaign_Fid: ${_campaign_Fid} _startTime: ${_startTime} _endTime: ${_endTime} _influencerActionsPointsArray: `,_influencerActionsPointsArray,` campaignBudget: ${campaignBudget}`);
 		try {
-			const tx=  await CampaignManager_user.createCampaign(_title,_description,_campaign_Fid,_startTime,_endTime,_influencerActionsPointsArray);
+			const tx=  await CampaignManager_user.createCampaign(_title,_description,_campaign_Fid,_startTime,_endTime,_influencerActionsPointsArray, { value: ethers.utils.parseEther(campaignBudget) } );
 			const receipt = await tx.wait();
 			if (receipt.status === false) {
 				throw new Error(`Transaction createCampaign failed`);
@@ -261,6 +263,7 @@ export {
 
 
     setup_user_chain,
+    userAddress,
         //READ
         getAccountInfo,
         getPendingCampaigns,
@@ -269,8 +272,8 @@ export {
         getReadyFroPaymentCampaignUIDs,
         get_Campaign_Specs,
         get_Campaign_PointMarking,
-        get_Campaign_platform__fees,
-        get_withdrawable_platform__fees,
+        get_Campaign_platform_fees,
+        get_withdrawable_platform_fees,
 
         //WRITE
         createCampaign,

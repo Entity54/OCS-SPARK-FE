@@ -1,5 +1,6 @@
 // import React from 'react'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
+import { SparkContext } from '@SparkContext';
 
 import Inputmask from 'inputmask';
 import flatpickr from "flatpickr";
@@ -7,48 +8,63 @@ import "flatpickr/dist/flatpickr.css";
 import Select2 from "select2"; 
 import "select2/dist/css/select2.css";
 
-import { 
-    chainSpecs, 
-} from '@Setup_EVM2';  
 
-import { getAccountInfo } from "@Setup_EVM";
+import { createCampaign, 
+    userAddress,
+    getAccountInfo,
+    getPendingCampaigns,
+    getActiveCampaignUIDs,
+    getExpiredCampaignUIDs,
+    getReadyFroPaymentCampaignUIDs,
+    get_Campaign_Specs,
+    get_Campaign_PointMarking,
+    get_Campaign_platform_fees,
+    get_withdrawable_platform_fees,
+    ADMIN_withdrawPlatformFees
+} from "@Setup_EVM";
 
 
 
 const NewProject = () => {
+
+    const { theme, toggleTheme, contextAccount  } = useContext(SparkContext);
+
     const dateInputSTARTRef = useRef(null);
     const dateInputENDRef = useRef(null);
 
-	const [campaignTitle, setCampaignTitle]   = useState("");
-	const [campaignFID, setCampaignFID]   = useState("");
-	const [campaignDescription, setCampaignDescription]   = useState("");
+	const [campaignTitle, setCampaignTitle]   = useState("Some Campaign Title at 2024");
+	const [campaignFID, setCampaignFID]   = useState("101");
+	const [campaignDescription, setCampaignDescription]   = useState("This is a marketing campaign for a travel company.");
 	const [campaignEthereumAddress, setCampaignEthereumAddress]   = useState("");
-    const [campaignBudget, setCampaignBudget]   = useState("");
-	const [startUnixTimeSecs, setStartUnixTimeSecs]   = useState("");
-	const [endUnixTimeSecs, setEndUnixTimeSecs]   = useState("");
+    const [campaignBudget, setCampaignBudget]   = useState("0.000001258");
+	const [startUnixTimeSecs, setStartUnixTimeSecs]   = useState(Math.floor(new Date().getTime() / 1000));
+	const [endUnixTimeSecs, setEndUnixTimeSecs]   = useState(10 * 60+ Math.floor(new Date().getTime() / 1000));
 
-    const [actionFollowCompanyAccount, setActionFollowCompanyAccount]   = useState("");
-    const [actionLikeCompanyCasts, setActionLikeCompanyCasts]   = useState("");
-    const [actionRacastCompanyCasts, setActionRacastCompanyCasts]   = useState("");
-    const [actionReplyToCompanyCasts, setActionReplyToCompanyCasts]   = useState("");
-    const [actionMentionCompanyAccountInCast, setActionMentionCompanyAccountInCast]   = useState("");
-    const [actionContainCompanyTaglineInCast, setActionContainCompanyTaglineInCast]   = useState("");
-    const [actionEmbedCompanyURLInCast, setActionEmbedCompanyURLInCast]   = useState("");
+    const [actionFollowCompanyAccount, setActionFollowCompanyAccount]   = useState("1");
+    const [actionLikeCompanyCasts, setActionLikeCompanyCasts]   = useState("2");
+    const [actionRacastCompanyCasts, setActionRacastCompanyCasts]   = useState("3");
+    const [actionReplyToCompanyCasts, setActionReplyToCompanyCasts]   = useState("4");
+    const [actionMentionCompanyAccountInCast, setActionMentionCompanyAccountInCast]   = useState("5");
+    const [actionContainCompanyTaglineInCast, setActionContainCompanyTaglineInCast]   = useState("6");
+    const [actionEmbedCompanyURLInCast, setActionEmbedCompanyURLInCast]   = useState("7");
 
     const [urlEmbed1, setUrlEmbed1]   = useState("https://www.example.com");
     const [tagLine1, setTagLine1]   = useState("Yolo holidays");
 
 
 
-    const registerCampaign = () => {
+    const registerCampaign = async () => {
         console.log("registerCampaign() called");
         console.log(`campaignTitle: ${campaignTitle}`);
         console.log(`campaignFID: ${campaignFID}`);
         console.log(`campaignDescription: ${campaignDescription}`);
+
         console.log(`campaignEthereumAddress: ${campaignEthereumAddress}`);
         console.log(`campaignBudget: ${campaignBudget}`);
+
         console.log(`startUnixTimeSecs: ${startUnixTimeSecs}`);
         console.log(`endUnixTimeSecs: ${endUnixTimeSecs}`);
+
         console.log(`actionFollowCompanyAccount: ${actionFollowCompanyAccount}`);
         console.log(`actionLikeCompanyCasts: ${actionLikeCompanyCasts}`);
         console.log(`actionRacastCompanyCasts: ${actionRacastCompanyCasts}`);
@@ -58,6 +74,20 @@ const NewProject = () => {
         console.log(`actionEmbedCompanyURLInCast: ${actionEmbedCompanyURLInCast}`);
         console.log(`urlEmbed1: ${urlEmbed1}`);
         console.log(`tagLine1: ${tagLine1}`);
+
+        await createCampaign(
+            campaignTitle, campaignDescription, campaignFID, startUnixTimeSecs, endUnixTimeSecs, 
+            [
+                actionFollowCompanyAccount, actionLikeCompanyCasts, actionRacastCompanyCasts, 
+                actionReplyToCompanyCasts, actionMentionCompanyAccountInCast, 
+                actionContainCompanyTaglineInCast, actionEmbedCompanyURLInCast
+            ], 
+            campaignBudget
+        )
+        // campaignEthereumAddress read autmatically from the wallet
+        //, campaignBudget passed with value, 
+        
+        // TODO urlEmbed1, tagLine1
     }
 
     const resetCampaign = () => {
@@ -81,10 +111,59 @@ const NewProject = () => {
     }
 
 
+    const get_PendingCampaigns = async () => {
+        const pendingCampaigns = await getPendingCampaigns();
+        console.log("pendingCampaigns: ",pendingCampaigns);
+    }
+    const get_ActiveCampaignUIDs = async () => {
+        const activeCampaignUIDs = await getActiveCampaignUIDs();
+        console.log("activeCampaignUIDs: ",activeCampaignUIDs);
+    
+    }
+    const get_ExpiredCampaignUIDs = async () => {
+        const expiredCampaignUIDs = await getExpiredCampaignUIDs();
+        console.log("expiredCampaignUIDs: ",expiredCampaignUIDs);
+    
+    }
+    const get_ReadyFroPaymentCampaignUIDs = async () => {
+        const readyForPaymentCampaignUIDs = await getReadyFroPaymentCampaignUIDs();
+        console.log("readyForPaymentCampaignUIDs: ",readyForPaymentCampaignUIDs);
+    }
+    const get_CampaignSpecs = async () => {
+        let uuid= "1";
+        const campaignSpecs = await get_Campaign_Specs(uuid);
+        console.log("campaignSpecs: ",campaignSpecs);
+    }
+    const get_CampaignPointMarking = async () => {
+        let uuid= "1";
+        const campaignPointMarking = await get_Campaign_PointMarking(uuid);
+        console.log("campaignPointMarking: ",campaignPointMarking);
+    }
+    const get_Campaignplatformfees = async () => {
+        let uuid= "1";
+        const campaignplatformfees = await get_Campaign_platform_fees(uuid);
+        console.log("campaignplatformfees: ",campaignplatformfees);
+    
+    }
+    const get_withdrawableplatformfees = async () => {
+        const withdrawableplatformfees = await get_withdrawable_platform_fees();
+        console.log("withdrawableplatformfees: ",withdrawableplatformfees);
+    }
+    const ADMINwithdrawPlatformFees = async () => {
+        const response = await ADMIN_withdrawPlatformFees();
+        console.log("withdrawableplatformfees: ",response);
+    }
+
+
+    useEffect(() => {
+        setCampaignEthereumAddress(contextAccount);
+    }, [contextAccount]);    
+    // useEffect(() => {
+    //     setCampaignEthereumAddress(userAddress);
+    // }, []);    
 
    
     useEffect(() => {
-
 
         //#region Date and Time Picker
         Inputmask({ "mask" : "(999) 999-9999" }).mask(".phone-number");
@@ -363,6 +442,68 @@ const NewProject = () => {
                 <br/>
                 <br/>
                 <br/>
+
+                <h5>Admin helper</h5>
+                <div className="col-12">
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_PendingCampaigns() }
+                    >getPendingCampaigns
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_ActiveCampaignUIDs() }
+                    >getActiveCampaignUIDs
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_ExpiredCampaignUIDs() }
+                    >getExpiredCampaignUIDs
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_ReadyFroPaymentCampaignUIDs() }
+                    >getReadyFroPaymentCampaignUIDs
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_CampaignSpecs() }
+                    >get_Campaign_Specs
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_CampaignPointMarking() }
+                    >get_Campaign_PointMarking
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_Campaignplatformfees() }
+                    >get_Campaign_platform__fees
+                    </button>
+
+                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
+                        onClick = { () => get_withdrawableplatformfees() }
+                    >get_withdrawable_platform_fees
+                    </button>
+
+
+                    <button type="button" className="btn btn-primary"
+                        onClick = { () => ADMINwithdrawPlatformFees() }
+                    >ADMIN_withdrawPlatformFees Project</button>
+                
+                </div>
+
+
+<div style={{ background: theme === 'light' ? '#fff' : '#333', color: theme === 'light' ? '#000' : '#fff' }}>
+      <h1>{`The current theme is ${theme}`}</h1>
+      <button type="button" onClick={toggleTheme}>
+        Toggle Theme
+      </button>
+    </div>
+<br/>
+<br/>
+<br/>
+
+
 {/* 
                 <div className="col-sm-6 col-12">
                     <div className="form-floating">

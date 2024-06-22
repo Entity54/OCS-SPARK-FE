@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { SparkContext } from '@SparkContext';
 import { useDispatch } from 'react-redux';
 import { setSelectedMod } from '../../Redux/actions/moreSettingsActions';
 
@@ -21,12 +22,17 @@ import { getAccountInfo } from "@Setup_EVM";
 
 const CommonHeader = () => {
 
+  const { broadcast  } = useContext(SparkContext);
+
+
   const [connectedAccount, setConnectedAccount]   = useState("");
   const [accountBalance, setAccountBalance]   = useState(0);
 
   const handleSWSuccess = async (provider, signer, address, chainId) => {
     console.log(`handleSWSuccess address: ${address} provider: `,provider,` signer: `,signer);
     setConnectedAccount(address);
+
+    broadcast(address);
   }
   const handleSWError = (error) => {
     console.log(`handleSWError error: `,error);
@@ -38,6 +44,8 @@ const CommonHeader = () => {
     if (connectedAccount) {
       const accountInfo = await getAccountInfo(connectedAccount)
       setAccountBalance(accountInfo.balanceETH);
+    //   setAccountBalance(accountInfo.balanceWEI);
+
     }
   }
 
