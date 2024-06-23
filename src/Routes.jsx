@@ -23,10 +23,11 @@ import MyContact from "./Partials/Apps/Users/MyContact/MyContact";
 import Analytics from "./Partials/Apps/MyProjects/Analytics/Analytics";
 
 import NewCampaign from "./Partials/Apps/MyProjects/NewProject/NewCampaign";
+import Campaigns from "./Partials/Apps/MyProjects/ProjectGrid/Campaigns";
 
 import ProjectList from "./Partials/Apps/MyProjects/ProjectList/ProjectList";
-import ProjectGrid from "./Partials/Apps/MyProjects/ProjectGrid/ProjectGrid";
-import ProjectDetails from "./Partials/Apps/MyProjects/ProjectDetails/ProjectDetails";
+import CampaignDetails from "./Partials/Apps/MyProjects/ProjectDetails/ProjectDetails";
+
 import ClientsList from "./Partials/Apps/MyProjects/ClientsList/ClientsList";
 import Inbox from "./Partials/Apps/Inbox/Inbox";
 import Chat from "./Partials/Apps/Chat/Chat";
@@ -102,8 +103,13 @@ const Routes = () => {
 
       
       {/* <Route exact path="/app" element={<AppIndex/>} /> */}
-      <Route exact path="/app/new-project" element={<NewCampaign/>} />
-      <Route exact path="/app/analytics" element={<Analytics/>} />
+      <Route exact path="/app/new-campaign" element={<NewCampaign/>} />
+      <Route exact path="/app/campaigns-grid" element={<Campaigns/>} />
+      <Route exact path="/app/project-details" element={<CampaignDetails/>} />
+      <Route exact path="/app/campaign-list" element={<ProjectList/>} />
+      
+      {/* <Route exact path="/app/new-project" element={<NewCampaign/>} />
+      <Route exact path="/app/project-grid" element={<Campaigns/>} /> */}
 
 
       <Route exact path="/app/my-profile" element={<MyProfile/>} />
@@ -115,9 +121,7 @@ const Routes = () => {
 
       
 
-      <Route exact path="/app/project-list" element={<ProjectList/>} />
-      <Route exact path="/app/project-grid" element={<ProjectGrid/>} />
-      <Route exact path="/app/project-details" element={<ProjectDetails/>} />
+      <Route exact path="/app/analytics" element={<Analytics/>} />
       <Route exact path="/app/clients-list" element={<ClientsList/>} />
       
       {/* <Route exact path="/app/calendar" element={<Calendar/>} /> */}

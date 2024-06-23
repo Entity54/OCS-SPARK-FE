@@ -67,6 +67,8 @@ const AdminLayout = ( {menuTitle, themeColor, layout, borderStroke, borderLayout
  
   return (
     <body data-bvite={`theme-${themeColor}`} data-bs-theme="dark" className={`docs ${borderRadius} ${monochrome} ${boxLayout} ${borderLayout} ${borderStroke} ${layout} ${sidebarHidden && 'sidebar-hide'} ${rightbarHidden ? 'rightbar-hide' : ''}`}>
+    {/* <div data-bvite={`theme-${themeColor}`} data-bs-theme="dark" className={`docs ${borderRadius} ${monochrome} ${boxLayout} ${borderLayout} ${borderStroke} ${layout} ${sidebarHidden && 'sidebar-hide'} ${rightbarHidden ? 'rightbar-hide' : ''}`}> */}
+
     {/* <div data-bvite="theme-AppleGreen" className="layout-border svgstroke-a layout-default"> */}
       {/* <main className={`container-fluid  px-0`}> */}
       
@@ -88,6 +90,7 @@ const AdminLayout = ( {menuTitle, themeColor, layout, borderStroke, borderLayout
         <CommonFooter />
         {/* <CommonSettings /> */}
       </main>
+    {/* </div> */}
     {/* </div> */}
     </body>
   )

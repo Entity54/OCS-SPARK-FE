@@ -176,12 +176,90 @@ const getReadyFroPaymentCampaignUIDs = async () => {
 	console.log(`readyFroPaymentCampaignUIDs: `,readyFroPaymentCampaignUIDs);
 	return readyFroPaymentCampaignUIDs;
 }
+const getCompletedCampaignUIDss = async () => {
+	const completedCampaignUIDss =  await CampaignManager_admin.get_completedCampaignUIDss();
+	console.log(`completedCampaignUIDss: `,completedCampaignUIDss);
+	return completedCampaignUIDss;
+}
 
 const get_Campaign_Specs = async (campaign_uuid) => {
 	const campaigneSpecs =  await CampaignManager_admin.getCampaign(campaign_uuid);
 	console.log(`campaigneSpecs: `,campaigneSpecs);
 	return campaigneSpecs;
 }
+const get_Formatted_Campaign_Specs = async (campaign_uuid) => {
+    const campaignSpecs =  await CampaignManager_admin.getCampaign(campaign_uuid);
+    console.log(`campaignSpecs: `,campaignSpecs);
+
+    let influencersFids = [], distributions = [];
+    for (let i=0; i<campaignSpecs.influencersFids.length; i++)
+    {
+    console.log(`campaignSpecs.influencersFids[i]: `,campaignSpecs.influencersFids[i]);
+
+        influencersFids.push(`${campaignSpecs.influencersFids[i]}`);
+        distributions.push(`${campaignSpecs.distributions[i]}`);
+    }
+    const startTime = new Date(Number(`${campaignSpecs.startTime}`)*1000).toLocaleString();
+    const endTime_secs = Number(`${campaignSpecs.endTime}`)
+    const endTime = new Date(endTime_secs*1000).toLocaleString();
+    console.log(`startTime: `,startTime);
+    console.log(`endTime: `,endTime);
+   
+    let state, textcolor;
+    if (campaignSpecs.state==0) 
+    {
+        state="Pending";
+        textcolor="text-warning";
+    }
+    else if (campaignSpecs.state==1) 
+    {
+        state="Active";
+        textcolor="text-info";
+    }
+    else if (campaignSpecs.state==2) 
+    {
+        state="Expired";
+        textcolor="text-danger";
+    }
+    else if (campaignSpecs.state==3) 
+    {
+        state="ReadyForPayment";
+        textcolor="text-success";
+    }
+    else if (campaignSpecs.state==4) 
+    {
+        state="Void";
+        textcolor="text-secondary";
+    }
+    else if (campaignSpecs.state==5) 
+    {
+        state="Paid";
+        textcolor="text-success";
+    }
+
+
+    const campaignObject = {
+        campaign_uuid: `${campaignSpecs.uuid}`,
+        campaign_owner: campaignSpecs.owner,
+        campaign_fid: `${campaignSpecs.campaign_Fid}`,
+        campaign_title: campaignSpecs.title,
+        campaign_description: campaignSpecs.description,
+        campaign_start_date: startTime,
+        campaign_end_date: endTime,
+        campaign_state: state,
+        campaign_budget: `${ethers.utils.formatEther(`${campaignSpecs.budget}`)}`,
+        campaign_influencersFids: influencersFids,
+        campaign_distributions: distributions,
+        // campaign_timestamp: `${campaignSpecs.timestamp}`,
+        campaign_end_date_secs: `${endTime_secs}`,
+        status_c:textcolor     //text-info text-success text-danger text-warning text-secondary
+    }
+    
+    console.log(`campaignObject: `,campaignObject);
+    return campaignObject;
+}
+
+ 
 
 const get_Campaign_PointMarking = async (campaign_uuid) => {
 	const campaignPointMarking =  await CampaignManager_admin.getCampaignPointMarking(campaign_uuid);
@@ -200,6 +278,27 @@ const get_withdrawable_platform_fees = async () => {
 	const withdrawableAmount =  await CampaignManager_admin.platform_Balance(CampaignManager_Address);
 	console.log(`withdrawableAmount: `,withdrawableAmount);
 	return withdrawableAmount;
+}
+
+const get_Campaign_isActive = async (campaign_uuid) => {
+	const isCampaignActive =  await CampaignManager_admin.isCampaignActive(campaign_uuid);
+	console.log(`isCampaignActive: `,isCampaignActive);
+	return isCampaignActive;
+}
+const get_campaignBalances = async (campaign_uuid) => {
+	const campaignBalances =  await CampaignManager_admin.campaignBalances(campaign_uuid);
+	console.log(`campaignBalances: `,campaignBalances);
+	return campaignBalances;
+}
+const get_isCampaignDistributionComplete = async (campaign_uuid) => {
+	const isCampaignDistributionComplete =  await CampaignManager_admin.isCampaignDistributionComplete(campaign_uuid);
+	console.log(`isCampaignDistributionComplete: `,isCampaignDistributionComplete);
+	return isCampaignDistributionComplete;
+}
+const get_isCampaignPaymentsComplete = async (campaign_uuid) => {
+	const isCampaignPaymentsComplete =  await CampaignManager_admin.isCampaignPaymentsComplete(campaign_uuid);
+	console.log(`isCampaignPaymentsComplete: `,isCampaignPaymentsComplete);
+	return isCampaignPaymentsComplete;
 }
 
 
@@ -270,10 +369,17 @@ export {
         getActiveCampaignUIDs,
         getExpiredCampaignUIDs,
         getReadyFroPaymentCampaignUIDs,
+        getCompletedCampaignUIDss,
         get_Campaign_Specs,
         get_Campaign_PointMarking,
         get_Campaign_platform_fees,
         get_withdrawable_platform_fees,
+        get_Campaign_isActive,
+        get_campaignBalances,
+        get_isCampaignDistributionComplete,
+        get_isCampaignPaymentsComplete,
+
+        get_Formatted_Campaign_Specs,
 
         //WRITE
         createCampaign,

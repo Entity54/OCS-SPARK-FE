@@ -11,7 +11,7 @@
     "base-sepolia": {
       "networkName": "base-sepolia",
       "chainId": 84532,
-      "address": "0x9Eec5250E1B685F9B4CcE8EB9bC1a07c5dAF6865",
+      "address": "0x7A18278D3D4CfBC1e94e254E9C12b8A55A637D75",
       "constructorArguments": [],
       "value": "0",
       "timestamp": ""

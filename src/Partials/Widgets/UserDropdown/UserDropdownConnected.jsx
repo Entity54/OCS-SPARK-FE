@@ -69,14 +69,18 @@ const UserDropdown = ({switchChain, network, disconnectWallet}) => {
 
 
 
-            <li className="dropdown-divider"></li>
+            {/* <li className="dropdown-divider"></li> */}
+            <div className="dropdown-divider"></div>
+
             <div className="d-flex align-items-center justify-content-center">
 
                     <button style={buttonStyles}  onClick={switchChain}>
                         Switch To {network.alt_chainName}
                     </button>
             </div>
-            <li className="dropdown-divider"></li>
+            {/* <li className="dropdown-divider"></li> */}
+            <div className="dropdown-divider"></div>
+
             <div className="d-flex align-items-center justify-content-center">
                     <button style={buttonStyles} onClick={disconnectWallet}>
                         Disconect

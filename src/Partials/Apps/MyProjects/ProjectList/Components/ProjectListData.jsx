@@ -4,7 +4,7 @@ import avatar3 from '../../../../../assets/images/xs/avatar3.jpg';
 import avatar4 from '../../../../../assets/images/xs/avatar4.jpg';
 import avatar5 from '../../../../../assets/images/xs/avatar5.jpg';
 import avatar6 from '../../../../../assets/images/xs/avatar6.jpg';
-
+ 
 export const TableList = [
     {
         project_name:'Project Doughnut Dungeon',
@@ -115,5 +115,28 @@ export const TableList = [
         valuemax:'100',
         status:'CRITICAL',
         status_c:'text-danger'
-    }
+    },
+    {
+        project_name:'11 Lorem ipsum dolor sit amet dis sapien',
+        assign: [avatar4, avatar3, avatar1],
+        start_date:'26 Jan 2023',
+        deadline:'23 Feb 2023',
+        task:'78',
+        valuenow:'25',
+        valuemax:'100',
+        status:'CRITICAL',
+        status_c:'text-danger'
+    },
+    {
+        project_name:'12 Lorem ipsum dolor sit amet dis sapien',
+        assign: [avatar4, avatar3, avatar1],
+        start_date:'26 Jan 2023',
+        deadline:'23 Feb 2023',
+        task:'78',
+        valuenow:'25',
+        valuemax:'100',
+        status:'CRITICAL',
+        status_c:'text-danger'
+    },
+
 ]

@@ -4,7 +4,7 @@ const ProjectDetails = () => {
   return (
          <div className="px-4 py-3 page-body">
             <div className="card p-4">
-                <h5>Ergonomic real-time adapter</h5>
+                <h5>Ergonomic real-time adapter 123</h5>
                 <div className="d-flex justify-content-between">
                     <p>Status: <span className="fw-bold text-success">Active</span></p>
                     <p>Priority: <span className="fw-bold text-danger">High</span></p>
