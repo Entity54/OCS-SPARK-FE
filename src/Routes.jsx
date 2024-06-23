@@ -10,6 +10,8 @@ import Maintenance from "./Partials/Pages/Authentication/Maintenance/Maintenance
 import NoPageFound from "./Partials/Pages/Authentication/NoPageFound/NoPageFound";
 
 import MyProfile from "./Partials/Apps/Users/MyProfile/MyProfile";
+
+
 import Calendar from "./Partials/Apps/MyCalendar/Calendar";
 
 import Index from "./Partials/Workspace/Dashboard/Index";
@@ -115,7 +117,10 @@ const Routes = () => {
 
       <Route exact path="/app/my-profile" element={<MyProfile/>} />
       <Route exact path="/app/account-settings" element={<AccountSetting/>} />
+      
       <Route exact path="/app/invoice" element={<Invoices/>} />
+
+
       <Route exact path="/app/user-activity" element={<UserActivity/>} />
       <Route exact path="/app/my-task" element={<MyTasks/>} />
       <Route exact path="/app/my-contact" element={<MyContact/>} />

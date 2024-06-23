@@ -1,11 +1,10 @@
 {
   "usersMenuItems": [
-    { "link": "/app/my-profile", "label": "My Profile - Influencer 1 / 2" },
-    {
-      "link": "/app/account-settings",
-      "label": "Account Settings Infuencer 2 / 2"
-    },
-    { "link": "/app/invoice", "label": "Invoices - Campiang Payments" },
+    { "link": "/app/my-profile", "label": "New" },
+    { "link": "/app/account-settings", "label": "Details" },
+
+    { "link": "/app/invoice", "label": "Good for Payments" },
+
     { "link": "/app/user-activity", "label": "User Activity NO" },
     { "link": "/app/my-task", "label": "My Tasks NO" },
     { "link": "/app/my-contact", "label": "My Contact NO" }
@@ -16,8 +15,8 @@
     { "link": "/app/hot-campaigns", "label": "Hot" },
     { "link": "/app/campaign-details", "label": "Details" },
 
-    { "link": "/app/analytics", "label": "Analytics" },
-    { "link": "/app/clients-list", "label": "Clients" }
+    { "link": "/app/analytics", "label": "DELETE Analytics" },
+    { "link": "/app/clients-list", "label": "DELETE Clients" }
   ],
   "bootstrapMenuItems": [
     { "link": "/docs/accordion", "label": "Accordion" },
