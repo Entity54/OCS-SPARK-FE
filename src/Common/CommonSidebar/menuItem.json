@@ -11,10 +11,10 @@
     { "link": "/app/my-contact", "label": "My Contact NO" }
   ],
   "projectMenuItems": [
-    { "link": "/app/new-campaign", "label": "New Campaign" },
-    { "link": "/app/campaigns-grid", "label": "Campaigns" },
-    { "link": "/app/project-details", "label": "Campaign Details" },
-    { "link": "/app/campaign-list", "label": "Campaign List" },
+    { "link": "/app/new-campaign", "label": "New" },
+    { "link": "/app/all-campaigns", "label": "All" },
+    { "link": "/app/hot-campaigns", "label": "Hot" },
+    { "link": "/app/campaign-details", "label": "Details" },
 
     { "link": "/app/analytics", "label": "Analytics" },
     { "link": "/app/clients-list", "label": "Clients" }

@@ -3,7 +3,7 @@ import avatar2 from '../../../../../assets/images/xs/avatar2.jpg';
 import avatar3 from '../../../../../assets/images/xs/avatar3.jpg';
 import avatar4 from '../../../../../assets/images/xs/avatar4.jpg';
 import avatar5 from '../../../../../assets/images/xs/avatar5.jpg';
-
+ 
 export const GridData = [
     {
         title:'Project Doughnut Dungeon',

@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const CardAction = () => {
-
+const CardAction = ({cardIsFullScreen}) => {
+    const [cardFS, setCardFS] = useState(false);  
+ 
     useEffect(() => {
         // Initialize Bootstrap tooltips
         const tooltips = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -19,6 +20,9 @@ const CardAction = () => {
         if (card) {
             card.classList.toggle('fullscreen');
         }
+
+        setCardFS(!cardFS);
+        cardIsFullScreen(!cardFS);
     };
 
     return (
@@ -32,7 +36,7 @@ const CardAction = () => {
                     <path d="M16 8l-5 5"></path>
                 </svg>
             </a>
-            <a href="#" className="dropdown-toggle after-none" data-bs-toggle="dropdown" aria-expanded="false" title="More Action">
+            {/* <a href="#" className="dropdown-toggle after-none" data-bs-toggle="dropdown" aria-expanded="false" title="More Action">
                 <svg className="svg-stroke" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
@@ -40,8 +44,8 @@ const CardAction = () => {
                     <path d="M12 12l0 .01"></path>
                     <path d="M16 12l0 .01"></path>
                 </svg>
-            </a>
-            <div className="dropdown-menu dropdown-menu-end shadow rounded-4 p-2">
+            </a> */}
+            {/* <div className="dropdown-menu dropdown-menu-end shadow rounded-4 p-2">
                 <a href="#" className="dropdown-item rounded-pill"><i className="me-2 fa fa-share"></i>Share</a>
                 <a href="#" className="dropdown-item rounded-pill"><i className="me-2 fa fa-pencil"></i>Rename</a>
                 <div className="dropdown-divider"></div>
@@ -52,7 +56,7 @@ const CardAction = () => {
                 <a href="#" className="dropdown-item rounded-pill"><i className="me-2 fa fa-download"></i>Download</a>
                 <div className="dropdown-divider"></div>
                 <a href="#" className="dropdown-item rounded-pill card-options-remove" data-toggle="card-remove"><i className="me-2 fa fa-trash"></i>Delete</a>
-            </div>
+            </div> */}
         </span>
     )
 }

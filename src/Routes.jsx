@@ -23,9 +23,9 @@ import MyContact from "./Partials/Apps/Users/MyContact/MyContact";
 import Analytics from "./Partials/Apps/MyProjects/Analytics/Analytics";
 
 import NewCampaign from "./Partials/Apps/MyProjects/NewProject/NewCampaign";
-import Campaigns from "./Partials/Apps/MyProjects/ProjectGrid/Campaigns";
+import HotCampaigns from "./Partials/Apps/MyProjects/ProjectGrid/Campaigns";
 
-import ProjectList from "./Partials/Apps/MyProjects/ProjectList/ProjectList";
+import AllCampaigns from "./Partials/Apps/MyProjects/ProjectList/ProjectList";
 import CampaignDetails from "./Partials/Apps/MyProjects/ProjectDetails/ProjectDetails";
 
 import ClientsList from "./Partials/Apps/MyProjects/ClientsList/ClientsList";
@@ -104,9 +104,10 @@ const Routes = () => {
       
       {/* <Route exact path="/app" element={<AppIndex/>} /> */}
       <Route exact path="/app/new-campaign" element={<NewCampaign/>} />
-      <Route exact path="/app/campaigns-grid" element={<Campaigns/>} />
-      <Route exact path="/app/project-details" element={<CampaignDetails/>} />
-      <Route exact path="/app/campaign-list" element={<ProjectList/>} />
+      {/* <Route exact path="/app/campaigns-grid" element={<HotCampaigns/>} /> */}
+      <Route exact path="/app/all-campaigns" element={<AllCampaigns/>} />
+      <Route exact path="/app/hot-campaigns" element={<HotCampaigns/>} />
+      <Route exact path="/app/campaign-details" element={<CampaignDetails/>} />
       
       {/* <Route exact path="/app/new-project" element={<NewCampaign/>} />
       <Route exact path="/app/project-grid" element={<Campaigns/>} /> */}

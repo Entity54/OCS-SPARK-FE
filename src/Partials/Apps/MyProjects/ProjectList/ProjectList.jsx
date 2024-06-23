@@ -151,11 +151,15 @@ const ProjectList = () => {
         // console.log(`prepareCampignData datetimeNow: `,datetimeNow,`  data.campaign_end_date_secs: `,data.campaign_end_date_secs,`  progress_percent: `,progress_percent);
 
         return {
-          uuid: (<a key={index} href="/app/project-details">{data.campaign_uuid}</a>),
+          uuid: (
+                  <Link key={index} to="/app/campaign-details" onClick = { () => selectedCampaign(data.campaign_uuid) }>
+                    {data.campaign_uuid}
+                  </Link>
+                ),
           owner: `${`${(data.campaign_owner).slice(0, 5)}...${(data.campaign_owner).slice(-5)}`}`,   //data.campaign_owner,
           fid: data.campaign_fid,
           title: (
-              <Link key={index} to="/app/project-details" onClick = { () => selectedCampaign(data.campaign_uuid) }>
+              <Link key={index} to="/app/campaign-details" onClick = { () => selectedCampaign(data.campaign_uuid) }>
                   {data.campaign_title}
               </Link>
           ),
