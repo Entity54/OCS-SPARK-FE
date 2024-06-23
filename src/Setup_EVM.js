@@ -189,17 +189,19 @@ const get_Campaign_Specs = async (campaign_uuid) => {
 }
 const get_Formatted_Campaign_Specs = async (campaign_uuid) => {
     const campaignSpecs =  await CampaignManager_admin.getCampaign(campaign_uuid);
-    console.log(`campaignSpecs: `,campaignSpecs);
+    // console.log(`campaignSpecs: `,campaignSpecs);
 
     let influencersFids = [], distributions = [];
     for (let i=0; i<campaignSpecs.influencersFids.length; i++)
     {
-    console.log(`campaignSpecs.influencersFids[i]: `,campaignSpecs.influencersFids[i]);
-
+        // console.log(`campaignSpecs.influencersFids[i]: `,campaignSpecs.influencersFids[i]);
         influencersFids.push(`${campaignSpecs.influencersFids[i]}`);
         distributions.push(`${campaignSpecs.distributions[i]}`);
     }
-    const startTime = new Date(Number(`${campaignSpecs.startTime}`)*1000).toLocaleString();
+
+    const campaignTimestamp = new Date(Number(`${campaignSpecs.timestamp}`)*1000).toLocaleString();
+    const startTime_secs = Number(`${campaignSpecs.startTime}`);
+    const startTime = new Date(startTime_secs*1000).toLocaleString();
     const endTime_secs = Number(`${campaignSpecs.endTime}`)
     const endTime = new Date(endTime_secs*1000).toLocaleString();
     console.log(`startTime: `,startTime);
@@ -250,7 +252,8 @@ const get_Formatted_Campaign_Specs = async (campaign_uuid) => {
         campaign_budget: `${ethers.utils.formatEther(`${campaignSpecs.budget}`)}`,
         campaign_influencersFids: influencersFids,
         campaign_distributions: distributions,
-        // campaign_timestamp: `${campaignSpecs.timestamp}`,
+        campaign_timestamp: campaignTimestamp,
+        campaign_start_date_secs: `${startTime_secs}`,
         campaign_end_date_secs: `${endTime_secs}`,
         status_c:textcolor     //text-info text-success text-danger text-warning text-secondary
     }

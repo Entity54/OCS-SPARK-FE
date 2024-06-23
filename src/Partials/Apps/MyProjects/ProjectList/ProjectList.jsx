@@ -5,7 +5,7 @@ import { SparkContext } from '@SparkContext';
 // import { useTable, useFilters, useGlobalFilter, usePagination, useSortBy } from 'react-table';
 import { TableList } from './Components/ProjectListData';
 
-import DataTable from '../../../../Common/DataTable/DataTable';
+import DataTable from '../../../../Common/DataTable/DataTable1';
   
 import { createCampaign, 
   getAccountInfo,
@@ -128,8 +128,26 @@ const ProjectList = () => {
 
   const prepareCampignData = () => {
         const datetimeNow = `${Math.floor(Date.now() / 1000)}`;
+
         let campaign_data = Table_List.map((data, index) => {
-        const progress_percent = Math.max(100,Math.floor(100*(datetimeNow / data.campaign_end_date_secs)));
+        let progress_percent, ends_in_mins=0, start_in_mins=0;
+        const startTime_secs = data.campaign_start_date_secs;
+        const endtTime_secs = data.campaign_end_date_secs;
+
+        if (datetimeNow > endtTime_secs)
+        {
+            progress_percent = 100;
+        }
+        else if (datetimeNow > startTime_secs)
+        {
+            const space = endtTime_secs - startTime_secs
+            const current_space = datetimeNow - startTime_secs
+            progress_percent = Math.min(100,Math.floor(100*(current_space / space)));
+            ends_in_mins = Math.floor((endtTime_secs - datetimeNow) / 60);
+        } else { 
+            progress_percent=0;
+            start_in_mins = Math.floor((startTime_secs - datetimeNow) / 60);
+        }
         // console.log(`prepareCampignData datetimeNow: `,datetimeNow,`  data.campaign_end_date_secs: `,data.campaign_end_date_secs,`  progress_percent: `,progress_percent);
 
         return {
@@ -149,7 +167,7 @@ const ProjectList = () => {
             <>
               <small className="text-muted">{progress_percent}%</small>
               <div className="progress" style={{height: "2px"}}>
-                  <div className="progress-bar bg-primary" role="progressbar" style={{width: `${datetimeNow}%`}} aria-valuenow={datetimeNow} aria-valuemin="0" aria-valuemax={data.campaign_end_date_secs}></div>
+                  <div className="progress-bar bg-primary" role="progressbar" style={{width: `${progress_percent}%`}} aria-valuenow={datetimeNow} aria-valuemin="0" aria-valuemax={data.campaign_end_date_secs}></div>
               </div>
             </>
           ),
@@ -177,7 +195,7 @@ const ProjectList = () => {
 
     useEffect(() => {
       if (Table_List.length>0) prepareCampignData();
-      // refreshCampaign();
+      // refreshCampaign(); //UNCOMMNENT THIS TO KEEP REFRESHING
       console.log(`refreshCampaign lastRefreshTimeStamp: `,new Date(lastRefreshTimeStamp));
     }, [Table_List]); 
 
@@ -283,6 +301,7 @@ const ProjectList = () => {
 
 
   return (
+      // <div className="px-4 py-3">
       <div className="px-4 py-3 page-body">
 
         {/* <div className="d-flex justify-content-between align-items-center mb-2">
