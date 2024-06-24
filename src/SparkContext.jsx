@@ -9,13 +9,14 @@ const SparkProvider = ({ children }) => {
   const [chosenCampaign, setChosenCampaign] = useState('');
   const [lastRefreshTimeStamp, setLastRefreshTimeStamp] = useState(0);
 
+  const [chosenInfuencerFid, setChosenInfuencerFid] = useState('');
 
   const refreshCampaign = () => {
     console.log(`1 lastRefreshTimeStamp: ${new Date(lastRefreshTimeStamp) } NOW: ${new Date()}`);
     setTimeout(() => {
       setLastRefreshTimeStamp(Date.now());
       console.log(`2 lastRefreshTimeStamp: ${new Date(lastRefreshTimeStamp) } NOW: ${new Date()}`);
-    }, 10000);
+    }, 30000);
   };
 
 
@@ -27,11 +28,17 @@ const SparkProvider = ({ children }) => {
     setChosenCampaign(campaign_uuid);
   };
 
+  const broadcast_ChosenInfuencerFid = (fid) => {
+    setChosenInfuencerFid(fid);
+  };
+
 
   return (
     <SparkContext.Provider value={{ contextAccount, broadcast, 
         refreshCampaign, lastRefreshTimeStamp, 
-        broadcast_ChosenCampaign, chosenCampaign  }}
+        broadcast_ChosenCampaign, chosenCampaign,  
+        broadcast_ChosenInfuencerFid, chosenInfuencerFid
+      }}
     >
       {children}
     </SparkContext.Provider>

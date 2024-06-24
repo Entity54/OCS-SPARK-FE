@@ -4,6 +4,8 @@ import { SparkContext } from '@SparkContext';
 import DataTable from '../../../../Common/DataTable/DataTable2';
 import { TableList } from './Components/ProjectListData';
 
+import { NeynarAuthButton, useNeynarContext } from "@neynar/react";
+
 
 import { createCampaign, 
     getAccountInfo,
@@ -21,7 +23,8 @@ import { createCampaign,
     get_isCampaignDistributionComplete,
     get_isCampaignPaymentsComplete,
     ADMIN_withdrawPlatformFees,
-  
+    
+    get_influencer,
     get_Formatted_Campaign_Specs
   } from "@Setup_EVM";
 
@@ -82,7 +85,8 @@ import { createCampaign,
 
 
 const ProjectDetails = () => {
-    const { refreshCampaign, lastRefreshTimeStamp, chosenCampaign } = useContext(SparkContext);
+    const { user } = useNeynarContext();
+    const { contextAccount, refreshCampaign, lastRefreshTimeStamp, chosenCampaign } = useContext(SparkContext);
 
     const [campaignUID, setCampaignUID]   = useState('');
     const [inputCampaignUID, setInputCampaignUID]   = useState('');
@@ -128,6 +132,11 @@ const ProjectDetails = () => {
     const [Table_List, setTable_List] = useState([]);  
     const [dataTT, setDataTT] = useState([]);  
 
+
+    const [influencer_fid, setInfluencer_fid] = useState('');
+    const [influencer_ownerAddress, setInfluencer_ownerAddress] = useState('');
+    const [registrationButtonStatus, setRegistrationButtonStatus] = useState(false);
+    const [registrationButtonColor, setRegistrationButtonColor] = useState('btn-primary');
 
     //#region columns
     // const columns = [
@@ -282,6 +291,15 @@ const ProjectDetails = () => {
     }
 
 
+    //TODO
+    const influencerRegistersToCampaign = async () => {
+        console.log(`influencerRegistersToCampaign campaignUID: ${campaignUID}`);
+        // campaignUID
+    }
+
+
+
+
 
     const get_Infuencers_List = async () => {
         let infuencer_fids_length = 10;
@@ -331,13 +349,30 @@ const ProjectDetails = () => {
 
 
 
-  
-
     useEffect(() => {
         const alpha = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
         const b = alpha.join(', ');
         setInfuencersFidsString(b);
       }, []); 
+
+
+      
+    useEffect(() => {
+        const retrieveUser = async () => {
+            console.log(` |||>>>> retrieveUser user.fid: ${user.fid}`);
+            const infuencerStruct = await get_influencer(`${user.fid}`);
+            console.log(` |||>>>> retrieveUser infuencerStruct.ownerAddress: ${infuencerStruct.ownerAddress}`);
+            const InfluencerOwnerAddress = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? infuencerStruct.ownerAddress : "Smart Wallet owner not Infuencer Owner"
+            const registration_ButtonStatus = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? false: true;
+            const registration_ButtonColor = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? "btn-primary": "btn-danger";
+
+            setInfluencer_ownerAddress(InfluencerOwnerAddress);
+            setRegistrationButtonStatus(registration_ButtonStatus);
+            setRegistrationButtonColor(registration_ButtonColor);
+            setInfluencer_fid(user.fid);
+        }
+        if (user) retrieveUser();
+    }, [user]); 
 
 
     useEffect(() => {
@@ -455,7 +490,7 @@ const ProjectDetails = () => {
                             {/* <dt className="small">Fid:</dt><dd>{fid}</dd> */}
                             <dt className="small">Start Time:</dt><dd><a href="#">{startTime}</a></dd>
                             <dt className="small">Infuencers Fids:</dt><dd>{infuencersFidsString}</dd>
-                            <dt className="small">Campaign Platfrom Fees:</dt><dd>{campaignPlatfromFees}</dd>
+                            {/* <dt className="small">Campaign Platfrom Fees:</dt><dd>{campaignPlatfromFees}</dd> */}
                         </dl>
                     </div>
                     <div className="col-6">
@@ -491,7 +526,7 @@ const ProjectDetails = () => {
                 <p>{description}</p>
 
 
-                <div className="my-4">
+                <div className="my-0">
                     <form className="row g-3">
                         <div className="col-12" style={{color:"#05B234"}}>
                             <h5>Score Points Allocation per Action</h5>
@@ -560,7 +595,7 @@ const ProjectDetails = () => {
                     </form>
                 </div>
 
-                <div className="my-4">
+                <div className="my-0">
                     <form className="row g-3">
                         <div className="col-12" style={{color:"#05B234"}}>
                             <h5>Marketing Assets</h5>
@@ -583,6 +618,63 @@ const ProjectDetails = () => {
                             </div>
                         </div>
                     </form>
+                </div>
+
+
+
+
+
+
+
+                <div className="my-4">
+                    {/* <form className="row g-3"> */}
+
+
+                    <div className="col-12" style={{color:"#05B234"}}>
+                        <h5>Infuencer Registration for Campaign</h5>
+                    </div>
+
+                    <div className="row">
+
+                        <div className="col-md-3">
+
+                            <div className="flex min-h-screen flex-col items-center justify-between p-24">
+                                <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
+                                    <NeynarAuthButton />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div className="col-md-2">
+                            <div className="form-floating">
+                                <input readOnly className="form-control" type="text" value={influencer_fid} placeholder="https://www.example.com"
+                                />
+                                <label>Farcaster Infuencer Fid</label>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4">
+                            <div className="form-floating">
+                                <input  readOnly className="form-control" type="text" value={influencer_ownerAddress} placeholder="https://www.example.com"
+                                />
+                                <label>Farcaster Infuencer Owner</label>
+                            </div>
+                        </div>
+
+                        <div className="col-md-2">
+                            <div className="form-floating">
+                                <button disabled={registrationButtonStatus} type="button" className={`btn ${registrationButtonColor}`} style={{color:"black"}}
+                                    onClick={() => influencerRegistersToCampaign()}
+                                >
+                                Register to Campaign
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* </form> */}
                 </div>
 
 

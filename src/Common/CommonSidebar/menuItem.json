@@ -3,6 +3,8 @@
     { "link": "/app/my-profile", "label": "New" },
     { "link": "/app/account-settings", "label": "Details" },
 
+    { "link": "/app/infuencers", "label": "All" },
+
     { "link": "/app/invoice", "label": "Good for Payments" },
 
     { "link": "/app/user-activity", "label": "User Activity NO" },

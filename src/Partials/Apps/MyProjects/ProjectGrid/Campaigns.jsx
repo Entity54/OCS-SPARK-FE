@@ -181,7 +181,7 @@ const ProjectGrid = () => {
 
                         return(
                         <li key={index} className="col-lg-6 col-md-6">
-                            <div className="card">
+                            <div className="card" style={{backgroundColor:"#001004"}}>
                                 <div className="card-header flex-nowrap align-items-center">
                                     <span className="text-primary">Title: <strong href="#" className="h6 card-title mb-0" style={{color:"white", marginLeft:"10px"}}>{data.campaign_title}</strong></span>
                                     <CardAction cardIsFullScreen={cardIsFullScreen} />

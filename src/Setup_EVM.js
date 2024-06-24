@@ -306,6 +306,18 @@ const get_isCampaignPaymentsComplete = async (campaign_uuid) => {
 
 
 
+const get_influencer = async (fid=0) => {
+	const influencerSruct =  await InfuencersManager_user.influencers(fid);
+	console.log(`influencerSruct: `,influencerSruct);
+	return influencerSruct;
+}
+const getInfluencersUIDs = async () => {
+	const influencersUIDs =  await InfuencersManager_user.get_influencersUIDs();
+	console.log(`influencersUIDs: `,influencersUIDs);
+	return influencersUIDs;
+}
+
+
 //#endregion READ
 
 //#region WRITE
@@ -322,6 +334,29 @@ const createCampaign = async (_title,_description,_campaign_Fid,_startTime,_endT
 		}
 		catch (e) {
 			console.log(` ********** while createCampaign an error occured ********** Error: `,e);
+			resolve(e);
+		}
+	});
+
+}
+
+
+const registerInfluencer = async (influencer_fid, custodyAddress, verifiedAccount) => {
+	return new Promise (async (resolve,reject) => {
+		console.log(`registerInfluencer influencer_fid: ${influencer_fid} custodyAddress: ${custodyAddress} verifiedAccount: ${verifiedAccount}`);
+		try {
+			const tx=  await InfuencersManager_user.registerInfluencer(influencer_fid,custodyAddress,verifiedAccount);
+			// const tx=  await InfuencersManager_user.registerInfluencer(620429,"0x0641d24cddacd194567ba37d9e7eb531d6bd2937","0x598487b88223169046e43bc4359fcc6d92467911");
+             
+             
+			const receipt = await tx.wait();
+			if (receipt.status === false) {
+				throw new Error(`Transaction registerInfluencer failed`);
+			}
+			resolve(`Transaction registerInfluencer succeeded`);
+		}
+		catch (e) {
+			console.log(` ********** while registerInfluencer an error occured ********** Error: `,e);
 			resolve(e);
 		}
 	});
@@ -381,11 +416,15 @@ export {
         get_campaignBalances,
         get_isCampaignDistributionComplete,
         get_isCampaignPaymentsComplete,
-
         get_Formatted_Campaign_Specs,
+
+        get_influencer,
+        getInfluencersUIDs,
 
         //WRITE
         createCampaign,
+
+        registerInfluencer,
 
         ADMIN_withdrawPlatformFees,
 }

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { SparkContext } from '@SparkContext';
 
 
 import CardAction from '../../../Widgets/CardAction/CardAction';
@@ -8,49 +9,65 @@ import { NeynarAuthButton, useNeynarContext } from "@neynar/react";
 
 
 
+import {  
+    get_influencer, 
+    registerInfluencer,
+  } from "@Setup_EVM";
+
+
 const MyProfile = () => {
 
     const { user } = useNeynarContext();
+    const { contextAccount  } = useContext(SparkContext);
+
 
     const [influencer_Fid, setInfluencer_Fid] = useState('');
     const [influencer_Username, setInfluencer_Username] = useState('');
     const [influencer_Displayname, setInfluencer_Displayname] = useState('');
-
     const [influencer_CustodyAddres, setInfluencer_CustodyAddres] = useState('');
-    const [influencer_VerifiedAccounts, setInfluencer_VerifiedAccounts] = useState('');
+    const [influencer_VerifiedAccounts, setInfluencer_VerifiedAccounts] = useState([]);
     const [influencer_VerifiedAccount, setInfluencer_VerifiedAccount] = useState('');
-
     const [influencer_pfp_url, setInfluencer_pfp_url] = useState('');
-
     const [influencer_active_status, setInfluencer_active_status] = useState('');
     const [influencer_Followers_Count, setInfluencer_Followers_Count] = useState('');
     const [influencer_Following_Count, setInfluencer_Following_Count] = useState('');
     const [influencer_HasPowerBadge, setInfluencer_HasPowerBadge] = useState('');
-
-
-
     const [influencer_AboutMe, setInfluencer_AboutMe] = useState('');
 
 
 
+    const register_infuencer_onPlatform = async () => {
+        console.log(`register_infuencer_onPlatform influencer_Fid: ${influencer_Fid} influencer_CustodyAddres: ${influencer_CustodyAddres} influencer_VerifiedAccounts: ${influencer_VerifiedAccounts} influencer_VerifiedAccount: ${influencer_VerifiedAccount} contextAccount: ${contextAccount}`);
+        if (influencer_Fid && influencer_CustodyAddres 
+            && influencer_VerifiedAccounts.includes(influencer_VerifiedAccount)
+        ) 
+        {
+            await registerInfluencer(influencer_Fid,influencer_CustodyAddres,influencer_VerifiedAccount);
+        }
+        else {
+            console.log(`Invalid Influencer Data`);
+        }
+    }
 
 
 
+
+
+//   useEffect(() => {
+//     // Load the Neynar script
+//     const script = document.createElement('script');
+//     script.src = "https://neynarxyz.github.io/siwn/raw/1.2.0/index.js";
+//     script.async = true;
+//     document.body.appendChild(script);
+
+//     // Cleanup function to remove the script when the component unmounts
+//     return () => {
+//       document.body.removeChild(script);
+//     };
+//   }, []);
 
   useEffect(() => {
-    // Load the Neynar script
-    const script = document.createElement('script');
-    script.src = "https://neynarxyz.github.io/siwn/raw/1.2.0/index.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    // Cleanup function to remove the script when the component unmounts
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  useEffect(() => {
+    if (!user) return;
     console.log(`user: `, user);
 
     console.log(`user.fid: `, user.fid);
@@ -91,6 +108,8 @@ const MyProfile = () => {
     <div className="ps-2 pt-2 pb-1 page-body">
         <div className="card bg-transparent border-0">
 
+   
+
             <div className="card-body">
                 <div className="row g-3">
 
@@ -121,8 +140,16 @@ const MyProfile = () => {
                             </div> */}
                             <div className="d-flex align-items-md-start align-items-center flex-column flex-md-row mt-4 w-100">
                                 {/* <img src={profileImage} alt="" className="rounded-4"/> */}
-                                <img src={influencer_pfp_url} alt="" className="rounded-4"/>
+                                {
+                                influencer_pfp_url?
+                                    <img src={influencer_pfp_url} alt="Profile image" className="rounded-4"/>
+                                    :
+                                    <img src="https://via.placeholder.com/300x200.png?text=Farcaster+Profile" alt="placeholder" className="rounded-4"/>
+                                }
 
+                                {/* <img src={influencer_pfp_url} alt="" className="rounded-4"/> */}
+                                {/* <img src="https://via.placeholder.com/300x200.png?text=Farcaster+Profile" alt="" className="rounded-4"/> */}
+ 
                                 <div className="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center">
                                     <h4 className="mb-1">{influencer_Username}</h4>
                                     <p>@{influencer_Displayname}</p>
@@ -247,7 +274,33 @@ const MyProfile = () => {
                             </div> */}
 
                         </div>
-                        <button type="submit" className="btn btn-primary">Register Profile</button>
+                        {/* <button type="submit" className="btn btn-primary">Register Profile</button> */}
+                        
+                        {/* <div className="my-3">
+                            <button className="btn btn-primary me-1"
+                            
+                            >Register</button>
+                            <button className="btn btn-dark"
+                            
+                            >Cancel</button>
+                        </div> */}
+
+                        <div className="col-12">
+                            <button type="button" className="btn btn-primary"
+                                onClick = { () => register_infuencer_onPlatform() }
+                            >Register On Platform</button>
+                            {/* <button type="button" className="btn btn-secondary me-1" style={{marginLeft:"10px"}}
+                                onClick = { () => resetCampaign() }
+                            >Cancel</button> */}
+                        </div>
+
+
+                        <div className="alert alert-warning" role="alert" style={{marginTop:"50px"}}>
+                            Please ensure you have signed in to your Farcaster profile with "Sign in with Neynar". Payable address must be one of the accounts verified with your Farcaster profile.
+                        </div>
+
+
+
                     </div>
                 </div> 
                 {/* <!--[ .row end ]--> */}

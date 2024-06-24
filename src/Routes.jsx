@@ -9,26 +9,32 @@ import Lockscreen from "./Partials/Pages/Authentication/Lockscreen/Lockscreen";
 import Maintenance from "./Partials/Pages/Authentication/Maintenance/Maintenance";
 import NoPageFound from "./Partials/Pages/Authentication/NoPageFound/NoPageFound";
 
-import MyProfile from "./Partials/Apps/Users/MyProfile/MyProfile";
-
 
 import Calendar from "./Partials/Apps/MyCalendar/Calendar";
 
 import Index from "./Partials/Workspace/Dashboard/Index";
 
 import MyWallet from "./Partials/Workspace/MyWallet/MyWallet";
-import AccountSetting from "./Partials/Apps/Users/AccountSetting/AccountSetting";
 import Invoices from "./Partials/Apps/Users/Invoices/Invoices";
 import UserActivity from "./Partials/Apps/Users/UserActivity/UserActivity";
 import MyTasks from "./Partials/Apps/Users/MyTasks/MyTasks";
 import MyContact from "./Partials/Apps/Users/MyContact/MyContact";
 import Analytics from "./Partials/Apps/MyProjects/Analytics/Analytics";
 
-import NewCampaign from "./Partials/Apps/MyProjects/NewProject/NewCampaign";
-import HotCampaigns from "./Partials/Apps/MyProjects/ProjectGrid/Campaigns";
 
+
+import NewCampaign from "./Partials/Apps/MyProjects/NewProject/NewCampaign";
 import AllCampaigns from "./Partials/Apps/MyProjects/ProjectList/ProjectList";
+import HotCampaigns from "./Partials/Apps/MyProjects/ProjectGrid/Campaigns";
 import CampaignDetails from "./Partials/Apps/MyProjects/ProjectDetails/ProjectDetails";
+
+
+import MyProfile from "./Partials/Apps/Users/MyProfile/MyProfile";
+import AccountSetting from "./Partials/Apps/Users/AccountSetting/AccountSetting";
+import Infuencers from "./Partials/Apps/MyProjects/ProjectGrid/Infuencers";
+
+
+
 
 import ClientsList from "./Partials/Apps/MyProjects/ClientsList/ClientsList";
 import Inbox from "./Partials/Apps/Inbox/Inbox";
@@ -117,6 +123,8 @@ const Routes = () => {
 
       <Route exact path="/app/my-profile" element={<MyProfile/>} />
       <Route exact path="/app/account-settings" element={<AccountSetting/>} />
+      <Route exact path="/app/infuencers" element={<Infuencers/>} />
+
       
       <Route exact path="/app/invoice" element={<Invoices/>} />
 

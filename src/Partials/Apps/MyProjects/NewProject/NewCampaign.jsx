@@ -420,12 +420,12 @@ const NewProject = () => {
 
 
                 <div className="col-12">
-                    <button type="button" className="btn btn-secondary me-1" data-bs-dismiss="modal"
-                        onClick = { () => resetCampaign() }
-                    >Cancel</button>
                     <button type="button" className="btn btn-primary"
                         onClick = { () => registerCampaign() }
                     >Create Campaign</button>
+                    <button type="button" className="btn btn-secondary me-1"  style={{marginLeft:"10px"}}
+                        onClick = { () => resetCampaign() }
+                    >Cancel</button>
                 </div>
 
 
