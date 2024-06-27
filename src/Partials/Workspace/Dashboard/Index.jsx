@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 
 import Chart from 'react-apexcharts'
 
@@ -59,100 +61,199 @@ const Index = () => {
 	}, [screenWidth]);
 	
   	return (
+		
 		<div className="px-4 py-3 page-body">
-			<div className="card mb-3">
-				<div className="card-body">
-
-
-
-
-
-{/* <div className="row g-4 li_animate">
-		<div className="col-xl-4 col-lg-4">
-
-			<div id="readNumberSW">  
-              <button style={{backgroundColor:"blue", color:"white"}} onClick={readMyNumber_SW}>
-                Read My Number SW
-              </button>
-              <input type="text" readOnly value = {my_number_SW} placeholder="" className="form-control fs-14" style={{backgroundColor:"lightgrey",  textAlign:"center", color:"black" }} />
-          </div>
-          <div id="readSenderSW">
-              <button style={{backgroundColor:"blue", color:"white"}} onClick={readSender_SW}>
-                Read Sender Address SW
-              </button>
-              <input type="text"  readOnly value = {msgSender_SW} placeholder="" className="form-control fs-14" style={{backgroundColor:"lightgrey",  textAlign:"center", color:"black"}} />
-          </div>
-          <div id="setNumberSW">
-              <button style={{backgroundColor:"blue", color:"white"}} onClick={setMyNewNumber_SW}>
-               Set My Number SW
-              </button>
-              <input type="text" value = {newNumber_SW} placeholder="" className="form-control fs-14" style={{backgroundColor:"lightgrey",  textAlign:"center", color:"black" }} 
-                onChange={(event) => setNewNumber_SW(event.target.value)}
-              />
-          </div>
-
-    </div>
-</div> */}
-
-
-
-
-
-
-
-
-
+			{/* <div className="card mb-3">
+				<div className="card-body"> */}
 
 					<div className="row g-4 li_animate">
-						<div className="col-xl-4 col-lg-4">
-							<span className="small">Welcome back!</span>
-							<h2 className="fw-bold mb-xl-5 mb-4">My Dashboard SPARK</h2>
+						<div className="col-xl-12 col-lg-12">
+							{/* <span className="small">Welcome back!</span> */}
+							<h2 className="fw-bold mb-xl-2 mb-2">Welcome To SPARK</h2>
 							<div className="d-flex align-items-start">
-								<img className="avatar lg rounded-circle border border-3" src={profileImage} alt="avatar"/>
+								{/* <img className="avatar lg rounded-circle border border-3" src={profileImage} alt="avatar"/> */}
 								<div className="ms-3">
-									<h4 className="mb-0 text-gradient title-font">Hello, Michelle!</h4>
-									<span className="text-muted small">michelle.glover@bvite.com</span>
-									<p className="mb-0 mt-xl-4 mt-3 text-muted small">"Power up your web app with our sleek (Bvite) Bootstrap admin dashboard template.</p>
+									<h4 className="mb-0 text-gradient title-font">Put A Tag Line Or Description In Here</h4>
+									{/* <span className="text-muted small">michelle.glover@bvite.com</span> */}
+									<p className="mb-0 mt-xl-2 mt-2 ms-3 mb-4 text-muted">Maybe Even One More Line In Here Explaining The Project</p>
 								</div>
 							</div>
 						</div>
-						<div className="col-xl-3 col-lg-3 col-md-4 col-sm-4">
-							<ul className="list-inline d-flex flex-column mb-0 ms-5 ms-sm-0 ps-4 ps-sm-0">
-								{YearData.map((data, index) => {
-								return(
-								<li key={index} className="list-inline-item mb-4">
-									<span className="small text-muted">{data.year}<span className={`ps-2 ${data.icon} ${data.text_color}`}> {data.per}</span></span>
-									<h6 className="mb-0 mt-1">
-										<CountingAnimation
-										start={0}
-										separator={'.'}
-										currency={data.currency}
-										end={data.value}
-										duration={5000}
-										/>
-									</h6>
-								</li>
-								)})}
-								<li className="list-inline-item">
-									<button type="button" className="btn btn-primary px-lg-3 py-lg-2">View Reports</button>
-								</li>
-							</ul>
+					</div>
+				{/* </div>
+			</div> */}
+					<div className="row mt-5">
+						<h5>Questions On The Project</h5>
+						<div className="col-4">
+							<div className="accordion accordion-flush" id="accordionFlushExample">
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingOne">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+											Is Turkish Delight Really Greek?
+										</button>
+									</h3>
+									<div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Of course it is not. The answer is in the name.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingTwo">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+											Did Socrates know anything?
+										</button>
+									</h3>
+									<div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">He lived until 80 years of age, so he knew how to avoid covid.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #3
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #4
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #5
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+
+							</div>
 						</div>
-						<div className="col-xl-5 col-lg-5 col-md-8 col-sm-8">
-							<Chart
-							id="apex-MyAnalytics"
-							className="apex-extra-none"
-							key={chartKey}
-							options={MyAnalytics}
-							series={MyAnalytics.series}
-							height={MyAnalytics.chart.height}
-							type={MyAnalytics.chart.type}
-							/>
+						<div className="col-4">
+							<div className="accordion accordion-flush" id="accordionFlushExample">
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingOne">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+											Accordion Item #6
+										</button>
+									</h3>
+									<div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingTwo">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+											Accordion Item #7
+										</button>
+									</h3>
+									<div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #8
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #9
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #10
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div className="col-4">
+							<div className="accordion accordion-flush" id="accordionFlushExample">
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingOne">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+											Accordion Item #11
+										</button>
+									</h3>
+									<div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingTwo">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+											Accordion Item #12
+										</button>
+									</h3>
+									<div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #13
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #14
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingThree">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+											Accordion Item #15
+										</button>
+									</h3>
+									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div className="row g-3">
+
+
+
+			{/* <div className="row g-3">
 				{CardData.map((data, index) => {
 				return(
 				<div key={index} className="col-lg-3 col-md-6 col-sm-6">
@@ -302,7 +403,7 @@ const Index = () => {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</div>
   	)
 }

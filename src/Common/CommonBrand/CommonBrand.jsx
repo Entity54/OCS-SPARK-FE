@@ -31,10 +31,10 @@ const CommonBrand = () => {
                             <path fill="var(--primary-color)" d="M22.9634 11.0029L18.4147 11.8178C18.3784 11.8243 18.3455 11.8417 18.3211 11.8672C18.2967 11.8927 18.2823 11.9248 18.2801 11.9586L18.0003 16.2791C17.9937 16.3808 18.0959 16.4598 18.2046 16.4369L19.471 16.1697C19.5895 16.1447 19.6966 16.2401 19.6722 16.3491L19.2959 18.0335C19.2706 18.1468 19.387 18.2438 19.5081 18.2101L20.2903 17.9929C20.4116 17.9592 20.5281 18.0564 20.5025 18.1699L19.9045 20.8157C19.8671 20.9812 20.1079 21.0715 20.2083 20.9296L20.2754 20.8348L23.9819 14.0722C24.044 13.959 23.937 13.8299 23.8009 13.8539L22.4974 14.0839C22.3749 14.1055 22.2706 14.0012 22.3052 13.8916L23.156 11.1951C23.1906 11.0854 23.086 10.981 22.9634 11.0029Z" />
                         </svg> */}
                         {/* <img className="avatar rounded-circle border border-3 shadow" src={profileImage} alt="avatar"/> */}
-                        <img className="avatar rounded-circle border border-3 shadow" src={logo} alt="avatar"/>
+                        <img className="d-flex align-items-center" src={logo} width="150px" height="100px" alt="avatar"/>
 
 
-                        <span className="fw-bold ps-2 fs-5 d-none d-xl-inline-flex text-gradient">SPARK</span>
+                        {/* <span className="fw-bold ps-2 fs-5 d-none d-xl-inline-flex text-gradient">SPARK</span> */}
                     </Link>
                 </div>
 
