@@ -23,9 +23,14 @@ import { createCampaign,
     get_isCampaignDistributionComplete,
     get_isCampaignPaymentsComplete,
     ADMIN_withdrawPlatformFees,
+
+    get_campaignTagline,
+    get_campaignEmbed,
     
+    get_Formatted_Campaign_Specs,
     get_influencer,
-    get_Formatted_Campaign_Specs
+    registerToCampaign,
+    infuencerRegisteredForCampaign,
   } from "@Setup_EVM";
 
 
@@ -124,10 +129,9 @@ const ProjectDetails = () => {
     const [campaign_influencersFidsArray, setCampaign_influencersFidsArray] = useState([]); 
     const [campaign_distributionsArray, setCampaign_DistributionsArray] = useState([]);  
     
-    //TODO
-        const [urlEmbed1, setUrlEmbed1]   = useState("");
-        const [tagLine1, setTagLine1]   = useState("");
-    //TODO
+    const [urlEmbed1, setUrlEmbed1]   = useState("");
+    const [tagLine1, setTagLine1]   = useState("");
+  
     let infuencer_fids = [];
     const [Table_List, setTable_List] = useState([]);  
     const [dataTT, setDataTT] = useState([]);  
@@ -137,6 +141,8 @@ const ProjectDetails = () => {
     const [influencer_ownerAddress, setInfluencer_ownerAddress] = useState('');
     const [registrationButtonStatus, setRegistrationButtonStatus] = useState(false);
     const [registrationButtonColor, setRegistrationButtonColor] = useState('btn-primary');
+    const [infuencerRegistered, setInfuencerRegistered] = useState(false);
+
 
     //#region columns
     // const columns = [
@@ -252,10 +258,10 @@ const ProjectDetails = () => {
         const isCampaignPaymentsComplete = await get_isCampaignPaymentsComplete(campaignUID);
         setPaymentsState(isCampaignPaymentsComplete ? 'Completed' : 'Pending');
 
-
-        // TODO
-        // setUrlEmbed1
-        // setTagLine1
+        const tag_line = await get_campaignTagline(campaignUID);
+        setTagLine1(tag_line);
+        const embed = await get_campaignEmbed(campaignUID);
+        setUrlEmbed1(embed);
 
 
         const datetimeNow = Math.floor(Date.now() / 1000);
@@ -290,15 +296,10 @@ const ProjectDetails = () => {
         setCampaignUID(choosenCampaign_uuid);
     }
 
-
-    //TODO
     const influencerRegistersToCampaign = async () => {
         console.log(`influencerRegistersToCampaign campaignUID: ${campaignUID}`);
-        // campaignUID
+        await registerToCampaign(campaignUID);
     }
-
-
-
 
 
     const get_Infuencers_List = async () => {
@@ -359,20 +360,25 @@ const ProjectDetails = () => {
       
     useEffect(() => {
         const retrieveUser = async () => {
-            console.log(` |||>>>> retrieveUser user.fid: ${user.fid}`);
-            const infuencerStruct = await get_influencer(`${user.fid}`);
+            const userFID = `${user.fid}`;
+            console.log(` |||>>>> retrieveUser user.fid: ${userFID} campaignUID: ${campaignUID}`);
+            const infuencerStruct = await get_influencer(userFID);
             console.log(` |||>>>> retrieveUser infuencerStruct.ownerAddress: ${infuencerStruct.ownerAddress}`);
             const InfluencerOwnerAddress = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? infuencerStruct.ownerAddress : "Smart Wallet owner not Infuencer Owner"
-            const registration_ButtonStatus = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? false: true;
-            const registration_ButtonColor = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? "btn-primary": "btn-danger";
+            let registration_ButtonStatus = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? false: true;
+            let registration_ButtonColor = (infuencerStruct.ownerAddress).toLowerCase() === contextAccount.toLowerCase()? "btn-primary": "btn-warning";
+            const isRegistered = await infuencerRegisteredForCampaign(campaignUID,userFID);
+            registration_ButtonStatus = isRegistered? true : false;
+            registration_ButtonColor = isRegistered? "btn-warning" : "btn-primary";
 
             setInfluencer_ownerAddress(InfluencerOwnerAddress);
             setRegistrationButtonStatus(registration_ButtonStatus);
             setRegistrationButtonColor(registration_ButtonColor);
-            setInfluencer_fid(user.fid);
+            setInfluencer_fid(userFID);
+            setInfuencerRegistered(isRegistered?"Yes":"No");
         }
-        if (user) retrieveUser();
-    }, [user]); 
+        if (user && campaignUID) retrieveUser();
+    }, [user,campaignUID]); 
 
 
     useEffect(() => {
@@ -648,17 +654,25 @@ const ProjectDetails = () => {
 
                         <div className="col-md-2">
                             <div className="form-floating">
-                                <input readOnly className="form-control" type="text" value={influencer_fid} placeholder="https://www.example.com"
+                                <input readOnly className="form-control" type="text" value={influencer_fid} placeholder=""
                                 />
                                 <label>Farcaster Infuencer Fid</label>
                             </div>
                         </div>
 
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                             <div className="form-floating">
-                                <input  readOnly className="form-control" type="text" value={influencer_ownerAddress} placeholder="https://www.example.com"
+                                <input  readOnly className="form-control" type="text" value={influencer_ownerAddress} placeholder=""
                                 />
                                 <label>Farcaster Infuencer Owner</label>
+                            </div>
+                        </div>
+
+                        <div className="col-md-1">
+                            <div className="form-floating">
+                                <input  readOnly className="form-control" type="text" value={infuencerRegistered} placeholder=""
+                                />
+                                <label>Registered</label>
                             </div>
                         </div>
 

@@ -8,6 +8,7 @@ import "flatpickr/dist/flatpickr.css";
 import Select2 from "select2"; 
 import "select2/dist/css/select2.css";
 
+import { amendWebhookElements } from "@WebhoooksManagement";
 
 import { createCampaign, 
     getAccountInfo,
@@ -19,6 +20,8 @@ import { createCampaign,
     get_Campaign_PointMarking,
     get_Campaign_platform_fees,
     get_withdrawable_platform_fees,
+    get_campaignFidToUid,
+    registerWebhookData,
     ADMIN_withdrawPlatformFees
 } from "@Setup_EVM";
 
@@ -31,11 +34,11 @@ const NewProject = () => {
     const dateInputSTARTRef = useRef(null);
     const dateInputENDRef = useRef(null);
 
-	const [campaignTitle, setCampaignTitle]   = useState("Some Campaign Title at 2024");
-	const [campaignFID, setCampaignFID]   = useState("101");
-	const [campaignDescription, setCampaignDescription]   = useState("This is a marketing campaign for a travel company.");
+	const [campaignTitle, setCampaignTitle]   = useState("Dream Cars Marketing Campaign");
+	const [campaignFID, setCampaignFID]   = useState("723628");
+	const [campaignDescription, setCampaignDescription]   = useState("This is a marketing campaign for a dream company");
 	const [campaignEthereumAddress, setCampaignEthereumAddress]   = useState("");
-    const [campaignBudget, setCampaignBudget]   = useState("0.000001258");
+    const [campaignBudget, setCampaignBudget]   = useState("0.00001");
 	const [startUnixTimeSecs, setStartUnixTimeSecs]   = useState(Math.floor(new Date().getTime() / 1000));
 	const [endUnixTimeSecs, setEndUnixTimeSecs]   = useState(10 * 60+ Math.floor(new Date().getTime() / 1000));
 
@@ -47,10 +50,30 @@ const NewProject = () => {
     const [actionContainCompanyTaglineInCast, setActionContainCompanyTaglineInCast]   = useState("6");
     const [actionEmbedCompanyURLInCast, setActionEmbedCompanyURLInCast]   = useState("7");
 
-    const [urlEmbed1, setUrlEmbed1]   = useState("https://www.example.com");
-    const [tagLine1, setTagLine1]   = useState("Yolo holidays");
+    const [urlEmbed1, setUrlEmbed1]   = useState("https://www.example-dream-cars.com");
+    const [tagLine1, setTagLine1]   = useState("Yolo Dream Cars");
 
 
+    const updateWebhookElements = async (campaign_uuid) => {
+     
+        const webhook_response = await amendWebhookElements (
+            "add", campaignFID, //"620429", 
+            "add", campaignFID, //"620429", 
+            "add", tagLine1,    //"Beautiful Day", 
+            "add", urlEmbed1,   //"https://www.example.com",
+            "add", campaignFID, //"620430", 
+            "add", campaignFID, //"620430", 
+            "add", campaignFID, //"620430", 
+            "add", campaignFID, //"620430"
+        );
+        console.log(`updateWebhookElements webhook_response: `,webhook_response);
+
+        await registerWebhookData(
+            campaign_uuid, campaignFID,                  
+            campaignFID, tagLine1, campaignFID, urlEmbed1, campaignFID, campaignFID, campaignFID, campaignFID
+        );
+
+    }
 
     const registerCampaign = async () => {
         console.log("registerCampaign() called");
@@ -83,10 +106,16 @@ const NewProject = () => {
             ], 
             campaignBudget
         )
-        // campaignEthereumAddress read autmatically from the wallet
-        //, campaignBudget passed with value, 
-        
-        // TODO urlEmbed1, tagLine1
+        // campaignEthereumAddress read automatically from Smart Wallet
+        // campaignBudget passed ETH with value, 
+
+
+        // Get campaign uuid of the campaign just registered
+        const campaign_uuid = await get_campaignFidToUid(campaignFID);
+        console.log(`get_campaignFidToUid For campaignFID: ${campaignFID} campaign_uuid: `,campaign_uuid);
+
+        // Update Webhook elements in Neynar AND record these in CampaignAssets.sol
+        updateWebhookElements(campaign_uuid);
     }
 
     const resetCampaign = () => {

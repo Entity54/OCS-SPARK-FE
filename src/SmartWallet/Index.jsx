@@ -4,6 +4,9 @@ import { CoinbaseWalletLogo } from './CoinbaseWalletLogo';
  
 import { ethers } from 'ethers';
 import { setup_user_chain, setup_wallet_SW } from "@Setup_EVM";
+import { setup_webhooks } from "@WebhoooksManagement";
+
+
 import UserDropdown from '../Partials/Widgets/UserDropdown/UserDropdownConnected';
 
 
@@ -89,7 +92,12 @@ export default function BlueCreateWalletButton({ handleSWSuccess, handleSWError 
 
     setup_wallet_SW(signer, chainIdNumber, chainName, address);
     setup_user_chain(signer, chainIdNumber, address);
+    
+    setup_webhooks(0); //For testing with ngrok
+    // setup_webhooks(chainIdNumber);
 
+
+    
 
       } catch (error) {
         handleSWError(error);

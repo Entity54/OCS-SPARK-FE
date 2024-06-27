@@ -11,7 +11,7 @@
     "base-sepolia": {
       "networkName": "base-sepolia",
       "chainId": 84532,
-      "address": "0x760f6B9279CdbB65372879F00C531946BC7C2DFD",
+      "address": "0x9b98daC2884676098d22c55991364b1d4517845a",
       "constructorArguments": [],
       "value": "0",
       "timestamp": ""
@@ -37,7 +37,33 @@
     "base-sepolia": {
       "networkName": "base-sepolia",
       "chainId": 84532,
-      "address": "0xb8EA5B11dfc0Fb68833eF6F7F8328E71d6A5Af5E",
+      "address": "0x970C4bbFfCeED69EC3ff4b7D4a6848F561Ca993a",
+      "constructorArguments": [],
+      "value": "0",
+      "timestamp": ""
+    },
+    "base": {
+      "networkName": "base",
+      "chainId": 8453,
+      "address": "",
+      "constructorArguments": [],
+      "value": "0",
+      "timestamp": ""
+    }
+  },
+  "CampaignAssets": {
+    "hardhat": {
+      "networkName": "hardhat",
+      "chainId": 31337,
+      "address": "",
+      "constructorArguments": [],
+      "value": "0",
+      "timestamp": ""
+    },
+    "base-sepolia": {
+      "networkName": "base-sepolia",
+      "chainId": 84532,
+      "address": "0xEb0052313DdEE0C670D5780406cAD7dD5017630b",
       "constructorArguments": [],
       "value": "0",
       "timestamp": ""

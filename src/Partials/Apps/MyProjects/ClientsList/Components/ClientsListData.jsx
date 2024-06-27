@@ -8,7 +8,7 @@ import avatar6 from '../../../../../assets/images/xs/avatar6.jpg';
 export const ClientsData = [
     {
         img: avatar1,
-        name:'Andew Jon',
+        name:'Andew Jonnnnn',
         address:'694 Shadow Brook Drive Carlisle, PA 17013',
         total_project:'21',
         payment:'$7,850',

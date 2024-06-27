@@ -36,7 +36,9 @@ import Infuencers from "./Partials/Apps/MyProjects/ProjectGrid/Infuencers";
 
 
 
-import ClientsList from "./Partials/Apps/MyProjects/ClientsList/ClientsList";
+import Flow from "./Partials/Apps/MyProjects/ClientsList/ClientsList";
+
+
 import Inbox from "./Partials/Apps/Inbox/Inbox";
 import Chat from "./Partials/Apps/Chat/Chat";
 import Blog from "./Partials/Apps/Blog/Blog";
@@ -136,7 +138,7 @@ const Routes = () => {
       
 
       <Route exact path="/app/analytics" element={<Analytics/>} />
-      <Route exact path="/app/clients-list" element={<ClientsList/>} />
+      <Route exact path="/app/clients-list" element={<Flow/>} />
       
       {/* <Route exact path="/app/calendar" element={<Calendar/>} /> */}
       {/* <Route exact path="/app/inbox" element={<Inbox/>} />

@@ -9,10 +9,10 @@ export default defineConfig({
     alias: {
       '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
       '@redux': path.resolve(__dirname, 'redux'),
-      '@Setup_EVM2': path.resolve(__dirname, 'src/Setup_EVM2.js'),
       '@Setup_EVM': path.resolve(__dirname, 'src/Setup_EVM.js'),
       '@SmartWallet': path.resolve(__dirname, 'src/SmartWallet/Index.jsx'),
       '@SparkContext': path.resolve(__dirname, 'src/SparkContext.jsx'),
+      '@WebhoooksManagement': path.resolve(__dirname, 'src/WebhoooksManagement.js'),
     },
   },
 });

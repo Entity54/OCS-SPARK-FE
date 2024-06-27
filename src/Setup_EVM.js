@@ -5,12 +5,12 @@ import { ethers, Wallet } from "ethers";
 // ************************** Import ABIs **************************
 import CampaignManager_raw from './Abis/CampaignManager.json';  
 import InfuencersManager_raw from './Abis/InfluencersManager.json';
+import CampaignAssets_raw from './Abis/CampaignAssets.json';
 import deploymentData from "./DeploymentData.json";
 
 
-
-
 import BoilerPlate_raw from './Abis/BoilerPlate.json';       
+//#region DELETE ME IT WORKS, ONLY NEEDED FOR TESTING
 const BoilerPlate_Address_Base_Sepolia = "0x43BFe09b90fBd4f509C24663a4e4E64367b038AA";  //Base Sepolia
 const BoilerPlate_Address_Base = "0x522d0EC555aE68970a7235B447b26A3815424bD8";          //Base Mainnet
 
@@ -30,24 +30,23 @@ const setup_wallet_SW = (wallet, chainId, chainName, walletAddress) => {
     }
 }
 
-//Smart Wallet - Contracts
-const getMyNumber_SW = async () => {
-    const value = await BoilerPlate_SW.my_number();
-    console.log(`SmartWallet getMyNumber: `,value);
-    return value;
-};
-const getSender_SW = async () => {
-    const value = await BoilerPlate_SW.sender();
-    console.log(`SmartWallet getSender: `,value);
-    return value;
-};
-const setMyNumber_SW = async (value=123) => {
-    const tx = await BoilerPlate_SW.set_my_number(value);
-    await tx.wait();
-    console.log(`SmartWallet setMyNumber tx: `,tx);
-};
-
-
+// //Smart Wallet - Contracts
+// const getMyNumber_SW = async () => {
+//     const value = await BoilerPlate_SW.my_number();
+//     console.log(`SmartWallet getMyNumber: `,value);
+//     return value;
+// };
+// const getSender_SW = async () => {
+//     const value = await BoilerPlate_SW.sender();
+//     console.log(`SmartWallet getSender: `,value);
+//     return value;
+// };
+// const setMyNumber_SW = async (value=123) => {
+//     const tx = await BoilerPlate_SW.set_my_number(value);
+//     await tx.wait();
+//     console.log(`SmartWallet setMyNumber tx: `,tx);
+// };
+//#endregion DELETE ME IT WORKS, ONLY NEEDED FOR TESTING
 
 
 
@@ -71,6 +70,7 @@ const chainSpecs = {
 		contracts: {
 			CampaignManager: "", 
 			InfuencersManager:"", 
+            CampaignAssets: "",
 		},
 	},
     8453: {
@@ -82,6 +82,7 @@ const chainSpecs = {
 		contracts: {
 			CampaignManager: "", 
 			InfuencersManager:"", 
+            CampaignAssets: "",
 		},
 	},
 }
@@ -101,6 +102,7 @@ const setupContracts = async () => {
 			{
 				CampaignManager: new ethers.Contract( deploymentData["CampaignManager"][chain.chainName]["address"] , CampaignManager_raw.abi , chain.chainProvider ), 
 				InfuencersManager: new ethers.Contract( deploymentData["InfuencersManager"][chain.chainName]["address"] , InfuencersManager_raw.abi , chain.chainProvider ),
+				CampaignAssets: new ethers.Contract( deploymentData["CampaignAssets"][chain.chainName]["address"] , CampaignAssets_raw.abi , chain.chainProvider ),
 
                 // CampaignManager: new ethers.Contract( deploymentData["CampaignManager"][chain.chainName]["address"] , CampaignManager_raw.abi , chain.chainWallet ), 
 				// InfuencersManager: new ethers.Contract( deploymentData["InfuencersManager"][chain.chainName]["address"] , InfuencersManager_raw.abi , chain.chainWallet ),
@@ -113,8 +115,8 @@ const setupContracts = async () => {
 
 
 let provider_Admin;
-let CampaignManager_admin, InfuencersManager_admin;
-let CampaignManager_user, InfuencersManager_user, userChainName, userAddress;
+let CampaignManager_admin, InfuencersManager_admin, CampaignAssets_admin;
+let CampaignManager_user, InfuencersManager_user, CampaignAssets_user, userChainName, userAddress;
 // SETTING UP USER CHAIN CONNECTION REFERENCES TO SMART CONTRACTS
 const setup_user_chain = async (wallet, chainId, walletAddress) => {
         const userChain 		= chainSpecs[chainId];
@@ -128,10 +130,12 @@ const setup_user_chain = async (wallet, chainId, walletAddress) => {
         provider_Admin 			= userChain.chainProvider;
         CampaignManager_admin 	= userChain.contracts.CampaignManager;
         InfuencersManager_admin = userChain.contracts.InfuencersManager;
+        CampaignAssets_admin    = userChain.contracts.CampaignAssets;
 
        // User References and Contracts
         CampaignManager_user   = new ethers.Contract( deploymentData["CampaignManager"][userChainName]["address"] , CampaignManager_raw.abi , wallet );
         InfuencersManager_user = new ethers.Contract( deploymentData["InfuencersManager"][userChainName]["address"] , InfuencersManager_raw.abi , wallet );
+	    CampaignAssets_user    = new ethers.Contract( deploymentData["CampaignAssets"][userChainName]["address"] , CampaignAssets_raw.abi , wallet );
 }
 
 
@@ -289,9 +293,10 @@ const get_Campaign_isActive = async (campaign_uuid) => {
 	return isCampaignActive;
 }
 const get_campaignBalances = async (campaign_uuid) => {
-	const campaignBalances =  await CampaignManager_admin.campaignBalances(campaign_uuid);
-	console.log(`campaignBalances: `,campaignBalances);
-	return campaignBalances;
+	const _campaignBalance =  await CampaignManager_admin.campaignBalances(campaign_uuid);
+    const campaignBalance = ethers.utils.formatEther(_campaignBalance);
+	console.log(`campaignBalance: `,campaignBalance);
+	return campaignBalance;
 }
 const get_isCampaignDistributionComplete = async (campaign_uuid) => {
 	const isCampaignDistributionComplete =  await CampaignManager_admin.isCampaignDistributionComplete(campaign_uuid);
@@ -302,6 +307,25 @@ const get_isCampaignPaymentsComplete = async (campaign_uuid) => {
 	const isCampaignPaymentsComplete =  await CampaignManager_admin.isCampaignPaymentsComplete(campaign_uuid);
 	console.log(`isCampaignPaymentsComplete: `,isCampaignPaymentsComplete);
 	return isCampaignPaymentsComplete;
+}
+ 
+const get_campaignFidToUid = async (campaign_fid) => {
+	const campaign_uuid =  await CampaignManager_admin.campaignFidToUid(campaign_fid);
+	console.log(`campaign_uuid: ${campaign_uuid}`);
+	return `${campaign_uuid}`;
+}
+
+
+
+const get_campaignTagline = async (campaign_uuid) => {
+	const campaign_tagline =  await CampaignAssets_admin.campaignTagLine(campaign_uuid);
+	console.log(`campaign_tagline: ${campaign_tagline}`);
+	return campaign_tagline;
+}
+const get_campaignEmbed = async (campaign_uuid) => {
+	const campaign_embed =  await CampaignAssets_admin.campaignEmbed(campaign_uuid);
+	console.log(`campaign_embed: ${campaign_embed}`);
+	return campaign_embed;
 }
 
 
@@ -316,6 +340,11 @@ const getInfluencersUIDs = async () => {
 	console.log(`influencersUIDs: `,influencersUIDs);
 	return influencersUIDs;
 }
+const infuencerRegisteredForCampaign = async (campaign_uuid,influencer_fid) => {
+	const isRegistered =  await InfuencersManager_user.isCampaignInfuencer(campaign_uuid,influencer_fid);
+	console.log(`isRegistered: `,isRegistered);
+	return isRegistered;
+}
 
 
 //#endregion READ
@@ -323,14 +352,14 @@ const getInfluencersUIDs = async () => {
 //#region WRITE
 const createCampaign = async (_title,_description,_campaign_Fid,_startTime,_endTime,_influencerActionsPointsArray,campaignBudget) => {
 	return new Promise (async (resolve,reject) => {
-		console.log(`_title: ${_title} _description: ${_description} _campaign_Fid: ${_campaign_Fid} _startTime: ${_startTime} _endTime: ${_endTime} _influencerActionsPointsArray: `,_influencerActionsPointsArray,` campaignBudget: ${campaignBudget}`);
+		console.log(`_title: ${_title} _description: ${_description} _campaign_Fid: ${_campaign_Fid} _startTime: ${_startTime} _endTime: ${_endTime} _influencerActionsPointsArray: `,_influencerActionsPointsArray,` campaignBudget: ${campaignBudget} ethers.utils.parseEther(campaignBudget): ${ethers.utils.parseEther(campaignBudget)}`);
 		try {
 			const tx=  await CampaignManager_user.createCampaign(_title,_description,_campaign_Fid,_startTime,_endTime,_influencerActionsPointsArray, { value: ethers.utils.parseEther(campaignBudget) } );
 			const receipt = await tx.wait();
 			if (receipt.status === false) {
 				throw new Error(`Transaction createCampaign failed`);
 			}
-			resolve(`Transaction createCampaign succeeded`);
+			resolve({msg:`Transaction createCampaign succeeded`, receipt, tx,});
 		}
 		catch (e) {
 			console.log(` ********** while createCampaign an error occured ********** Error: `,e);
@@ -346,14 +375,12 @@ const registerInfluencer = async (influencer_fid, custodyAddress, verifiedAccoun
 		console.log(`registerInfluencer influencer_fid: ${influencer_fid} custodyAddress: ${custodyAddress} verifiedAccount: ${verifiedAccount}`);
 		try {
 			const tx=  await InfuencersManager_user.registerInfluencer(influencer_fid,custodyAddress,verifiedAccount);
-			// const tx=  await InfuencersManager_user.registerInfluencer(620429,"0x0641d24cddacd194567ba37d9e7eb531d6bd2937","0x598487b88223169046e43bc4359fcc6d92467911");
-             
-             
 			const receipt = await tx.wait();
 			if (receipt.status === false) {
 				throw new Error(`Transaction registerInfluencer failed`);
 			}
-			resolve(`Transaction registerInfluencer succeeded`);
+			resolve({msg:`Transaction registerInfluencer succeeded`, receipt, tx,});
+
 		}
 		catch (e) {
 			console.log(` ********** while registerInfluencer an error occured ********** Error: `,e);
@@ -361,6 +388,58 @@ const registerInfluencer = async (influencer_fid, custodyAddress, verifiedAccoun
 		}
 	});
 
+}
+
+
+const registerToCampaign = async (campaign_uuid) => {
+	return new Promise (async (resolve,reject) => {
+		console.log(`registerToCampaign campaign_uuid: ${campaign_uuid}`);
+		try {
+			const tx=  await InfuencersManager_user.registerToCampaign(campaign_uuid);
+			const receipt = await tx.wait();
+			if (receipt.status === false) {
+				throw new Error(`Transaction registerToCampaign failed`);
+			}
+			resolve({msg:`Transaction registerToCampaign succeeded`, receipt, tx,});
+
+		}
+		catch (e) {
+			console.log(` ********** while registerToCampaign an error occured ********** Error: `,e);
+			resolve(e);
+		}
+	});
+
+}
+
+
+
+const registerWebhookData = async ( 
+    _campaign_uuid,                 _campaing_fid,                  _cast_created_parent_author_fids,
+    _cast_created_text,             _cast_created_mentioned_fids,   _cast_created_parent_embeds,
+    _follow_created_target_fids,    _follow_deleted_target_fids,    _reaction_created_target_fids, 
+    _reaction_deleted__target_fids
+) => {
+	return new Promise (async (resolve,reject) => {
+		console.log(`registerWebhookData campaign_uuid: ${_campaign_uuid}`);
+		try {
+			const tx=  await CampaignAssets_user.registerWebhookData(
+                _campaign_uuid,                 _campaing_fid,                  _cast_created_parent_author_fids,
+                _cast_created_text,             _cast_created_mentioned_fids,   _cast_created_parent_embeds,
+                _follow_created_target_fids,    _follow_deleted_target_fids,    _reaction_created_target_fids, 
+                _reaction_deleted__target_fids
+            );
+			const receipt = await tx.wait();
+			if (receipt.status === false) {
+				throw new Error(`Transaction registerWebhookData failed`);
+			}
+			resolve({msg:`Transaction registerWebhookData succeeded`, receipt, tx,});
+
+		}
+		catch (e) {
+			console.log(` ********** while registerWebhookData an error occured ********** Error: `,e);
+			resolve(e);
+		}
+	});
 }
 
 
@@ -377,7 +456,8 @@ const ADMIN_withdrawPlatformFees = async () => {
 			if (receipt.status === false) {
 				throw new Error(`Transaction ADMIN_withdrawPlatformFees failed`);
 			}
-			resolve(`Transaction ADMIN_withdrawPlatformFees succeeded`);
+			resolve({msg:`Transaction ADMIN_withdrawPlatformFees succeeded`, receipt, tx,});
+
 		}
 		catch (e) {
 			console.log(` ********** while ADMIN_withdrawPlatformFees an error occured ********** Error: `,e);
@@ -394,9 +474,9 @@ const ADMIN_withdrawPlatformFees = async () => {
 export {
 	//Wallets
     setup_wallet_SW,
-        getMyNumber_SW,
-        getSender_SW,
-        setMyNumber_SW,
+    //     getMyNumber_SW,
+    //     getSender_SW,
+    //     setMyNumber_SW,
 
 
     setup_user_chain,
@@ -417,14 +497,22 @@ export {
         get_isCampaignDistributionComplete,
         get_isCampaignPaymentsComplete,
         get_Formatted_Campaign_Specs,
+        get_campaignFidToUid,
 
         get_influencer,
         getInfluencersUIDs,
+        infuencerRegisteredForCampaign,
+
+        get_campaignTagline,
+        get_campaignEmbed,
 
         //WRITE
         createCampaign,
 
         registerInfluencer,
+        registerToCampaign,
+
+        registerWebhookData,
 
         ADMIN_withdrawPlatformFees,
 }

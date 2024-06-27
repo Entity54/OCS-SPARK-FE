@@ -5,11 +5,7 @@
 
     { "link": "/app/infuencers", "label": "All" },
 
-    { "link": "/app/invoice", "label": "Good for Payments" },
-
-    { "link": "/app/user-activity", "label": "User Activity NO" },
-    { "link": "/app/my-task", "label": "My Tasks NO" },
-    { "link": "/app/my-contact", "label": "My Contact NO" }
+    { "link": "/app/invoice", "label": "Good for Payments" }
   ],
   "projectMenuItems": [
     { "link": "/app/new-campaign", "label": "New" },
@@ -17,8 +13,8 @@
     { "link": "/app/hot-campaigns", "label": "Hot" },
     { "link": "/app/campaign-details", "label": "Details" },
 
-    { "link": "/app/analytics", "label": "DELETE Analytics" },
-    { "link": "/app/clients-list", "label": "DELETE Clients" }
+    { "link": "/app/clients-list", "label": "Flow" },
+    { "link": "/app/analytics", "label": "DELETE Analytics" }
   ],
   "bootstrapMenuItems": [
     { "link": "/docs/accordion", "label": "Accordion" },

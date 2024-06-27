@@ -21,9 +21,9 @@ import avatar4 from '../../../assets/images/xs/avatar4.jpg';
 import CardAction from '../../Widgets/CardAction/CardAction'
 
 
-import {
-	  getMyNumber_SW, getSender_SW, setMyNumber_SW
-} from "@Setup_EVM";
+// import {
+// 	  getMyNumber_SW, getSender_SW, setMyNumber_SW
+// } from "@Setup_EVM";
 
 
 const Index = () => {
@@ -32,24 +32,24 @@ const Index = () => {
 	const [chartKey, setChartKey] = useState(0); // Add a key to force chart refresh
 
 
-				//Used for the Contract calls SmartWallet
-				const [my_number_SW, setMy_number_SW]   = useState("");
-				const [msgSender_SW, setMsgSender_SW]   = useState("");
-				const [newNumber_SW, setNewNumber_SW]   = useState(0);
+				// //Used for the Contract calls SmartWallet
+				// const [my_number_SW, setMy_number_SW]   = useState("");
+				// const [msgSender_SW, setMsgSender_SW]   = useState("");
+				// const [newNumber_SW, setNewNumber_SW]   = useState(0);
 
-				///#region Contract Calling Functions via SmartWallet
-				const readMyNumber_SW = async () => {
-					const response = await getMyNumber_SW();
-					setMy_number_SW(response);
-				}
-				const readSender_SW = async () => {
-					const response = await getSender_SW();
-					setMsgSender_SW(response);
-				}
-				const setMyNewNumber_SW = async () => {
-					setMyNumber_SW(newNumber_SW);
-				}
-				//#endregion
+				// ///#region Contract Calling Functions via SmartWallet
+				// const readMyNumber_SW = async () => {
+				// 	const response = await getMyNumber_SW();
+				// 	setMy_number_SW(response);
+				// }
+				// const readSender_SW = async () => {
+				// 	const response = await getSender_SW();
+				// 	setMsgSender_SW(response);
+				// }
+				// const setMyNewNumber_SW = async () => {
+				// 	setMyNumber_SW(newNumber_SW);
+				// }
+				// //#endregion
 
 
 
@@ -67,7 +67,7 @@ const Index = () => {
 
 
 
-<div className="row g-4 li_animate">
+{/* <div className="row g-4 li_animate">
 		<div className="col-xl-4 col-lg-4">
 
 			<div id="readNumberSW">  
@@ -92,7 +92,7 @@ const Index = () => {
           </div>
 
     </div>
-</div>
+</div> */}
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ClientsData } from './Components/ClientsListData'
-
+ 
 const ClientsList = () => {
   return (
         <div className="px-4 py-3 page-body">
@@ -8,7 +8,7 @@ const ClientsList = () => {
                 {ClientsData.map((data, index) => {
                 return(
                 <li key={index} className="col-12">
-                    <div className="bg-light p-3 rounded-4 d-flex align-items-center flex-column flex-md-row">
+                    <div className="bg-dark p-3 rounded-4 d-flex align-items-center flex-column flex-md-row">
                         <img className="avatar lg rounded-circle img-thumbnail ms-auto me-auto shadow" src={data.img} alt=""/>
                         <div className="ms-md-2 ms-lg-3 text-md-start text-center w-100 mt-4 mt-md-0">
                             <div className="row g-0 align-items-center">
