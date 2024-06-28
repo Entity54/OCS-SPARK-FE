@@ -87,7 +87,7 @@ const AdminLayout = ( {menuTitle, themeColor, layout, borderStroke, borderLayout
       
         <Routes />
        
-        <CommonFooter />
+        {/* <CommonFooter /> */}
         {/* <CommonSettings /> */}
       </main>
     {/* </div> */}

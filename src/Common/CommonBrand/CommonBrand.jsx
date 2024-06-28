@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import UserDropdown from '../../Partials/Widgets/UserDropdown/UserDropdown';
 
 // import profileImage from '../../assets/images/profile_av.png';
-import logo from '../../assets//Logos/l6.png';
+import logo from '../../assets//Logos/l7.png';
 
 
 
