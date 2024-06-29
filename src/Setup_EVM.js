@@ -6,6 +6,7 @@ import { ethers, Wallet } from "ethers";
 import CampaignManager_raw from './Abis/CampaignManager.json';  
 import InfuencersManager_raw from './Abis/InfluencersManager.json';
 import CampaignAssets_raw from './Abis/CampaignAssets.json';
+import SquawkProcessor_raw from './Abis/SquawkProcessor.json';
 import deploymentData from "./DeploymentData.json";
 
 
@@ -55,6 +56,8 @@ const setup_wallet_SW = (wallet, chainId, chainName, walletAddress) => {
 const RPC_BASE_KEY = import.meta.env.VITE_RPC_BASE_KEY;
 const PRIVATE_KEY = import.meta.env.VITE_PRIVATE_KEY;
 const public_signer = new Wallet(PRIVATE_KEY);   
+
+const VITE_NEYNAR_API_KEY = import.meta.env.VITE_NEYNAR_API_KEY;
 // ************************** //
 
 
@@ -103,9 +106,7 @@ const setupContracts = async () => {
 				CampaignManager: new ethers.Contract( deploymentData["CampaignManager"][chain.chainName]["address"] , CampaignManager_raw.abi , chain.chainProvider ), 
 				InfuencersManager: new ethers.Contract( deploymentData["InfuencersManager"][chain.chainName]["address"] , InfuencersManager_raw.abi , chain.chainProvider ),
 				CampaignAssets: new ethers.Contract( deploymentData["CampaignAssets"][chain.chainName]["address"] , CampaignAssets_raw.abi , chain.chainProvider ),
-
-                // CampaignManager: new ethers.Contract( deploymentData["CampaignManager"][chain.chainName]["address"] , CampaignManager_raw.abi , chain.chainWallet ), 
-				// InfuencersManager: new ethers.Contract( deploymentData["InfuencersManager"][chain.chainName]["address"] , InfuencersManager_raw.abi , chain.chainWallet ),
+				SquawkProcessor: new ethers.Contract( deploymentData["SquawkProcessor"][chain.chainName]["address"] , SquawkProcessor_raw.abi , chain.chainProvider ),
 			};
 
 		} else chain.contracts = {};
@@ -115,8 +116,8 @@ const setupContracts = async () => {
 
 
 let provider_Admin;
-let CampaignManager_admin, InfuencersManager_admin, CampaignAssets_admin;
-let CampaignManager_user, InfuencersManager_user, CampaignAssets_user, userChainName, userAddress;
+let CampaignManager_admin, InfuencersManager_admin, CampaignAssets_admin, SquawkProcessor_admin;
+let CampaignManager_user, InfuencersManager_user, CampaignAssets_user, SquawkProcessor_user, userChainName, userAddress;
 // SETTING UP USER CHAIN CONNECTION REFERENCES TO SMART CONTRACTS
 const setup_user_chain = async (wallet, chainId, walletAddress) => {
         const userChain 		= chainSpecs[chainId];
@@ -131,11 +132,15 @@ const setup_user_chain = async (wallet, chainId, walletAddress) => {
         CampaignManager_admin 	= userChain.contracts.CampaignManager;
         InfuencersManager_admin = userChain.contracts.InfuencersManager;
         CampaignAssets_admin    = userChain.contracts.CampaignAssets;
+        SquawkProcessor_admin    = userChain.contracts.SquawkProcessor;
+
 
        // User References and Contracts
         CampaignManager_user   = new ethers.Contract( deploymentData["CampaignManager"][userChainName]["address"] , CampaignManager_raw.abi , wallet );
         InfuencersManager_user = new ethers.Contract( deploymentData["InfuencersManager"][userChainName]["address"] , InfuencersManager_raw.abi , wallet );
 	    CampaignAssets_user    = new ethers.Contract( deploymentData["CampaignAssets"][userChainName]["address"] , CampaignAssets_raw.abi , wallet );
+	    SquawkProcessor_user    = new ethers.Contract( deploymentData["SquawkProcessor"][userChainName]["address"] , SquawkProcessor_raw.abi , wallet );
+
 }
 
 
@@ -155,6 +160,14 @@ const getAccountInfo = async (account_address) => {
     console.log(`getAccountInfo account_address: ${account_address} nonce: ${nonce} balanceWEI: ${balanceWEI} balanceETH: ${balanceETH} blockNumber: ${blockNumber}`);
     return {nonce, balanceWEI, balanceETH, blockNumber};
 }
+
+
+const convertWeiToEth = (wei) => {
+    const eth = ethers.utils.formatEther(wei);
+    // consolelog(`convertWeiToEth wei: ${wei} eth: ${eth}`);
+    return eth;
+}   
+
 //#endregion
 
 
@@ -318,12 +331,12 @@ const get_campaignFidToUid = async (campaign_fid) => {
 
 
 const get_campaignTagline = async (campaign_uuid) => {
-	const campaign_tagline =  await CampaignAssets_admin.campaignTagLine(campaign_uuid);
+	const campaign_tagline =  await CampaignAssets_admin.campaignTagLine_uuid(campaign_uuid);
 	console.log(`campaign_tagline: ${campaign_tagline}`);
 	return campaign_tagline;
 }
 const get_campaignEmbed = async (campaign_uuid) => {
-	const campaign_embed =  await CampaignAssets_admin.campaignEmbed(campaign_uuid);
+	const campaign_embed =  await CampaignAssets_admin.campaignEmbed_uuid(campaign_uuid);
 	console.log(`campaign_embed: ${campaign_embed}`);
 	return campaign_embed;
 }
@@ -331,20 +344,162 @@ const get_campaignEmbed = async (campaign_uuid) => {
 
 
 const get_influencer = async (fid=0) => {
-	const influencerSruct =  await InfuencersManager_user.influencers(fid);
+	const influencerSruct =  await InfuencersManager_admin.influencers(fid);
 	console.log(`influencerSruct: `,influencerSruct);
 	return influencerSruct;
 }
 const getInfluencersUIDs = async () => {
-	const influencersUIDs =  await InfuencersManager_user.get_influencersUIDs();
+	const influencersUIDs =  await InfuencersManager_admin.get_influencersUIDs();
 	console.log(`influencersUIDs: `,influencersUIDs);
 	return influencersUIDs;
 }
 const infuencerRegisteredForCampaign = async (campaign_uuid,influencer_fid) => {
-	const isRegistered =  await InfuencersManager_user.isCampaignInfuencer(campaign_uuid,influencer_fid);
+	const isRegistered =  await InfuencersManager_admin.isCampaignInfuencer(campaign_uuid,influencer_fid);
 	console.log(`isRegistered: `,isRegistered);
 	return isRegistered;
 }
+
+
+
+const get_total_campaign_score = async (campaignUID) => {
+	const total_campaign_points_BigInt =  await InfuencersManager_admin.total_campaign_score(campaignUID);
+    const total_campaign_points = `${total_campaign_points_BigInt}`;
+	console.log(`total_campaign_points: `,total_campaign_points);
+	return total_campaign_points;
+}
+
+const get_infuencer_PointsArray_for_Campaign = async (campaignUID, influencerFid) => {
+    const infuencer_Points_BigInt =  await InfuencersManager_admin.getCampaignScoresForInfluencer(campaignUID, influencerFid);
+    const infuencer_PointsArray = infuencer_Points_BigInt.map((points) => `${points}`);
+    console.log(`infuencer_PointsArray: `,infuencer_PointsArray);
+    return infuencer_PointsArray;
+}
+
+
+
+const get_SquawkBoxLength = async () => {
+    const squawkBoxLength_BigInt =  await SquawkProcessor_admin.getSquawkBoxLength();
+    const squawkBoxLength = Number(`${squawkBoxLength_BigInt}`);
+    console.log(`squawkBoxLength: `,squawkBoxLength);
+    return squawkBoxLength;
+}
+
+
+const get_lastProcessedIndex = async () => {
+    const lastProcessedIndex_BigInt =  await SquawkProcessor_admin.lastProcessedIndex();
+    const lastProcessedIndex = Number(`${lastProcessedIndex_BigInt}`);
+    console.log(`lastProcessedIndex: `,lastProcessedIndex);
+    return lastProcessedIndex;
+}
+
+
+
+const get_SquawkBoxElementRange = async (fromIndex,toIndex) => {
+    const arrayOfSquawkObjects =  await SquawkProcessor_admin.getSquawkBoxElementRange(fromIndex,toIndex);
+
+    let newArrayOfSquawkObjects = [];
+
+    for (let i=0; i<arrayOfSquawkObjects.length; i++)
+    {
+        const squawkObject = arrayOfSquawkObjects[i];
+        console.log(`arrayOfSquawkObjects[${i}]: `,squawkObject);
+
+        const processed =  Number(`${squawkObject.processed}`);
+
+        if (processed===1) {
+
+                let squwak_message;
+                
+                const code = Number(`${squawkObject.code}`);
+
+                if (code===14) {
+                    squwak_message = `Followed user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===15) {
+                    squwak_message = `Unfollowed user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===16) {
+                    squwak_message = `Liked a cast with hash ${squawkObject.cast_hash}  of user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===17) {
+                    squwak_message = `Recasted a cast with hash ${squawkObject.cast_hash}  of user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===18) {
+                    squwak_message = `Unliked a cast with hash ${squawkObject.cast_hash}  of user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===19) {
+                    squwak_message = `Deleted a re-cast of cast with hash ${squawkObject.cast_hash}  of user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===20) {
+                    squwak_message = `Replied to the cast with hash ${squawkObject.replyToMessageHash}  of user with Farcaster Id ${squawkObject.data[0]}, with the cast with hash  ${squawkObject.cast_hash}`;
+                }
+                else if (code===21) {
+                    squwak_message = `Posted a cast with hash ${squawkObject.cast_hash} that includes the url embed "${squawkObject.embeded_string}"`;
+                }
+                else if (code===22) {
+                    squwak_message = `Mentioned in posted cast with hash ${squawkObject.cast_hash}  the user with Farcaster Id ${squawkObject.data[0]}`;
+                }
+                else if (code===23) {
+                    squwak_message = `Posted a cast with hash ${squawkObject.cast_hash} that includes the tag line "${squawkObject.embeded_string}"`;
+                }
+
+
+                let new_squawkObject = {
+                    timestamp: new Date(Number(`${squawkObject.created_at}`)*1000).toLocaleString(),
+                    infuencerFid: `${squawkObject.user_fid}`,
+                    infuencerFollowers: `${squawkObject.user_followers}`,
+                    squwak_message,
+                    nonce: `${squawkObject.nonce}`,
+                    // processed: processed===0 ? "Pending" : "Processed",
+                }
+
+                newArrayOfSquawkObjects.push(new_squawkObject);
+        }
+    }
+    
+    console.log(`newArrayOfSquawkObjects: `,newArrayOfSquawkObjects);
+    return newArrayOfSquawkObjects;
+}
+
+
+
+
+const getUserInfo_withFids_Bulk = async (fidsARARY=[620429,3,5]) => {
+
+    const apiKey = VITE_NEYNAR_API_KEY;
+    const user_url = `https://api.neynar.com/v2/farcaster/user/bulk?fids=${fidsARARY.join('%2C')}`;
+    //Example: 'https://api.neynar.com/v2/farcaster/user/bulk?fids=620429%2C3%2C5'
+  
+    const user_response = await fetch(user_url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Encoding': 'gzip, deflate, br',
+        'api_key': apiKey,
+      },
+    });
+  
+    const response = await user_response.json();
+    // console.log(response)
+
+    const users = response.users;
+    let users_pfp_url_Array = [];
+    for (let i=0; i<users.length; i++)
+    {
+        const user = users[i];
+        console.log(`User[${i}].pfp_url: `,user.pfp_url);
+        users_pfp_url_Array.push(user.pfp_url);
+    } 
+
+    return users_pfp_url_Array;
+  }
+
+
+
+
+
+
+
+
 
 
 //#endregion READ
@@ -420,12 +575,26 @@ const registerWebhookData = async (
     _reaction_deleted__target_fids
 ) => {
 	return new Promise (async (resolve,reject) => {
-		console.log(`registerWebhookData campaign_uuid: ${_campaign_uuid}`);
+		console.log(`registerWebhookData  campaign_uuid: ${_campaign_uuid}`);
+
+        // console.log(`_campaign_uuid: ${_campaign_uuid} _campaing_fid: ${_campaing_fid} 
+        // _cast_created_parent_author_fids: ${_cast_created_parent_author_fids} _cast_created_text: ${_cast_created_text} 
+        // _cast_created_mentioned_fids: ${_cast_created_mentioned_fids} _cast_created_parent_embeds: ${_cast_created_parent_embeds} 
+        // _follow_created_target_fids: ${_follow_created_target_fids} _follow_deleted_target_fids: ${_follow_deleted_target_fids} 
+        // _reaction_created_target_fids: ${_reaction_created_target_fids} _reaction_deleted__target_fids: ${_reaction_deleted__target_fids}`);
+
+
 		try {
 			const tx=  await CampaignAssets_user.registerWebhookData(
-                _campaign_uuid,                 _campaing_fid,                  _cast_created_parent_author_fids,
-                _cast_created_text,             _cast_created_mentioned_fids,   _cast_created_parent_embeds,
-                _follow_created_target_fids,    _follow_deleted_target_fids,    _reaction_created_target_fids, 
+                _campaign_uuid,                 
+                _campaing_fid,                 
+                 _cast_created_parent_author_fids,
+                _cast_created_text,             
+                _cast_created_mentioned_fids,  
+                 _cast_created_parent_embeds,
+                _follow_created_target_fids,   
+                 _follow_deleted_target_fids,    
+                 _reaction_created_target_fids, 
                 _reaction_deleted__target_fids
             );
 			const receipt = await tx.wait();
@@ -502,9 +671,15 @@ export {
         get_influencer,
         getInfluencersUIDs,
         infuencerRegisteredForCampaign,
+        get_infuencer_PointsArray_for_Campaign,
 
         get_campaignTagline,
         get_campaignEmbed,
+
+        get_SquawkBoxLength,
+        get_lastProcessedIndex,
+        get_SquawkBoxElementRange,
+        getUserInfo_withFids_Bulk,
 
         //WRITE
         createCampaign,
@@ -515,4 +690,7 @@ export {
         registerWebhookData,
 
         ADMIN_withdrawPlatformFees,
+
+        //Utilities
+        convertWeiToEth,
 }

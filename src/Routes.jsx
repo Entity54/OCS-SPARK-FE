@@ -42,7 +42,10 @@ import Flow from "./Partials/Apps/MyProjects/ClientsList/ClientsList";
 import Inbox from "./Partials/Apps/Inbox/Inbox";
 import Chat from "./Partials/Apps/Chat/Chat";
 import Blog from "./Partials/Apps/Blog/Blog";
-import FileManager from "./Partials/Apps/FileManager/FileManager";
+
+import Admin from "./Partials/Apps/FileManager/FileManager";
+
+
 import Accordion from "./Partials/Plugins/BootstrapUI/Accordion/Accordion";
 import Alerts from "./Partials/Plugins/BootstrapUI/Alerts/Alerts";
 import UserAvatar from "./Partials/Plugins/BootstrapUI/UserAvatar/UserAvatar";
@@ -109,7 +112,7 @@ const Routes = () => {
       <Route exact path="/" element={<Index/>} />
       <Route exact path="/index" element={<Index/>} />
 
-      <Route exact path="/my-wallet" element={<MyWallet/>} />
+      {/* <Route exact path="/my-wallet" element={<MyWallet/>} /> */}
 
       
       {/* <Route exact path="/app" element={<AppIndex/>} /> */}
@@ -146,7 +149,7 @@ const Routes = () => {
       <Route exact path="/app/blog" element={<Blog/>} /> */}
 
 
-      <Route exact path="/app/filemanager" element={<FileManager/>} />
+      <Route exact path="/app/filemanager" element={<Admin/>} />
       <Route exact path="/docs/accordion" element={<Accordion/>} />
       <Route exact path="/docs/alerts" element={<Alerts/>} />
       <Route exact path="/docs/avatar" element={<UserAvatar/>} />

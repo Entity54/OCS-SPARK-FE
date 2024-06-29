@@ -7,26 +7,21 @@ import { TableList } from './Components/ProjectListData';
 import { NeynarAuthButton, useNeynarContext } from "@neynar/react";
 
 
-import { createCampaign, 
-    getAccountInfo,
-    getPendingCampaigns,
-    getActiveCampaignUIDs,
-    getExpiredCampaignUIDs,
-    getReadyFroPaymentCampaignUIDs,
-    getCompletedCampaignUIDss,
+import { 
     get_Campaign_Specs,
     get_Campaign_PointMarking,
     get_Campaign_platform_fees,
-    get_withdrawable_platform_fees,
+    // get_withdrawable_platform_fees,
     get_Campaign_isActive,
     get_campaignBalances,
     get_isCampaignDistributionComplete,
     get_isCampaignPaymentsComplete,
-    ADMIN_withdrawPlatformFees,
+    get_infuencer_PointsArray_for_Campaign,
+    // ADMIN_withdrawPlatformFees,
 
+    convertWeiToEth,
     get_campaignTagline,
     get_campaignEmbed,
-    
     get_Formatted_Campaign_Specs,
     get_influencer,
     registerToCampaign,
@@ -39,10 +34,6 @@ import { createCampaign,
     {
         Header: 'Infuencer Fis',
         accessor: 'infuencerFid',
-    },
-    {
-        Header: 'Distribution %',
-        accessor: 'distributionPercent',
     },
     {
         Header: 'Amount ETH',
@@ -144,76 +135,9 @@ const ProjectDetails = () => {
     const [infuencerRegistered, setInfuencerRegistered] = useState(false);
 
 
-    //#region columns
-    // const columns = [
-    //     {
-    //       Header: 'Project Name',
-    //       accessor: 'projectName',
-    //     },
-    //     {
-    //       Header: 'Assign',
-    //       accessor: 'assign',
-    //     },
-    //     {
-    //       Header: 'Start Date',
-    //       accessor: 'startDate',
-    //     },
-    //     {
-    //       Header: 'Deadline',
-    //       accessor: 'deadline',
-    //     },
-    //     {
-    //       Header: 'Task',
-    //       accessor: 'task',
-    //     },
-    //     {
-    //       Header: 'Progress',
-    //       accessor: 'progress',
-    //     },
-    //     {
-    //       Header: 'Status',
-    //       accessor: 'status',
-    //     },
-    //     {
-    //       Header: 'Action',
-    //       accessor: 'action',
-    //     },
-    //   ];
-//#endregion columns
-
-//#region dataT
-    // let dataT = TableList.map((data, index) => {
-    //   return {
-    //     projectName: (<a key={index} href="/app/project-details">{data.project_name}</a>),
-    //     assign: (
-    //       <>
-    //         <div className="avatar-list avatar-list-stacked d-flex ps-2">
-    //         {data.assign.map((img, index) => {
-    //           return (
-    //           <img key={index} className="avatar sm rounded-circle" src={img} data-bs-toggle="tooltip" title="Avatar" alt={`Avatar ${index}`} />
-    //           )})}
-    //         </div>
-    //       </>
-    //     ),
-    //     startDate: data.start_date,
-    //     deadline: data.deadline,
-    //     task: data.task,
-    //     progress: (
-    //       <>
-    //         <small className="text-muted">{data.valuenow} / {data.valuemax}</small>
-    //         <div className="progress" style={{height: "2px"}}>
-    //             <div className="progress-bar bg-primary" role="progressbar" style={{width: `${data.valuenow}%`}} aria-valuenow={data.valuenow} aria-valuemin="0" aria-valuemax={data.valuemax}></div>
-    //         </div>
-    //       </>
-    //     ),
-    //     status: (<span className={`badge ${data.status_c}`}>{data.status}</span>),
-    //   };
-    // });
-//#endregion dataT
 
 
-
-    const get_Campaign_Specs = async () => {
+    const getCampaignSpecs = async () => {
         const campaignObject = await get_Formatted_Campaign_Specs(campaignUID);
         // console.log('campaignObject:', campaignObject);
         
@@ -303,27 +227,47 @@ const ProjectDetails = () => {
 
 
     const get_Infuencers_List = async () => {
-        let infuencer_fids_length = 10;
-        // let infuencer_fids = [];
-        for (let i = 0; i < infuencer_fids_length; i++) {
-            const infuencerObject = {
-                infuencerFid: i,
-                distributionPercent: `${35}%`,
-                amountETH: `${0.5}`,
-                totalPoints: `${100}`,
-                actionFollow: `${1}`,
-                actionLike: `${2}`,
-                actionRecast: `${3}`,
-                actionReply: `${4}`,
-                actionMention: `${5}`,
-                actionTagline: `${6}`,
-                actionURLEmbed: `${7}`,
-                status: `Active`,
-                status_c: `bg-success`,
+
+        const campaign_specs = await get_Campaign_Specs(campaignUID);
+        const campaign_influencersFids = (campaign_specs.influencersFids).map((fid) => `${fid}`);
+        console.log(`get_Infuencers_List campaign_influencersFids: `,campaign_influencersFids);
+
+        const campaign_paid_amounts = (campaign_specs.distributions).map((dist) => `${dist}`);
+        console.log(`get_Infuencers_List campaign_paid_amounts: `,campaign_paid_amounts);
+
+        if (campaign_influencersFids.length > 0) {
+
+            for (let i = 0; i < campaign_influencersFids.length; i++) {
+
+                const infuencerFid = campaign_influencersFids[i];
+                console.log(`get_Infuencers_List infuencerFid: `,infuencerFid);
+                const infuencer_scores = await get_infuencer_PointsArray_for_Campaign(campaignUID, infuencerFid);
+                console.log(`get_Infuencers_List infuencer_scores: `,infuencer_scores);
+                
+                const infuencerObject = {
+                    infuencerFid: infuencerFid,
+                    amountETH: `${Number(convertWeiToEth(campaign_paid_amounts[i])).toFixed(10)}`,
+                    totalPoints: `${infuencer_scores[7]}`,
+                    actionFollow: `${infuencer_scores[0]}`,
+                    actionLike: `${infuencer_scores[1]}`,
+                    actionRecast: `${infuencer_scores[2]}`,
+                    actionReply: `${infuencer_scores[3]}`,
+                    actionMention: `${infuencer_scores[4]}`,
+                    actionTagline: `${infuencer_scores[5]}`,
+                    actionURLEmbed: `${infuencer_scores[6]}`,
+                    status: `Active`,
+                    status_c: `bg-success`,
+                }
+                infuencer_fids.push(infuencerObject);
             }
-            infuencer_fids.push(infuencerObject);
+
+
         }
-        console.log(`infuencer_fids: `,infuencer_fids);
+        else {
+            console.log(`campaign_influencersFids: `,campaign_influencersFids);
+            console.log(`No influencers in campaign`);
+        }
+
     }
 
 
@@ -332,7 +276,6 @@ const ProjectDetails = () => {
         let infuencer_data = Table_List.map((data, index) => {
         return {
             infuencerFid: data.infuencerFid,
-            distributionPercent: data.distributionPercent,
             amountETH: data.amountETH,
             totalPoints: data.totalPoints,
             actionFollow: data.actionFollow,
@@ -384,10 +327,10 @@ const ProjectDetails = () => {
     useEffect(() => {
 
         const retrieveData = async () => {
-            await get_Campaign_Specs();
+            await getCampaignSpecs();
 
             infuencer_fids = [];
-            get_Infuencers_List();
+            await get_Infuencers_List();
             setTable_List(infuencer_fids);
             console.log(`CAMPAIGN DETAILS 1 retrieveData lastRefreshTimeStamp: `,new Date(lastRefreshTimeStamp));
         }
@@ -455,8 +398,6 @@ const ProjectDetails = () => {
                 <br/>
 
 
-
-
                 <h5>Title: {title} </h5>
                 <div className="d-flex justify-content-between">
                     <p>Status: 
@@ -481,8 +422,6 @@ const ProjectDetails = () => {
                 <div className="d-flex justify-content-between">
                     <p>Budget: <span className="fw-bold text-info">ETH {budget}</span></p>
                     <p>Campaign Platform Balance: <span className="fw-bold text-info">ETH {campaignPlatfromBalance}</span></p>
-                    {/* <p>Distributions: <span className="fw-bold text-primary">{distributionsState}</span></p> */}
-                    {/* <p>Payments: <span className="fw-bold text-primary">{paymentsState}</span></p> */}
                 </div>
                 <div className="d-flex justify-content-between">
                     <p>Distributions: <span className="fw-bold text-primary">{distributionsState}</span></p>
@@ -493,17 +432,13 @@ const ProjectDetails = () => {
                     <div className="col-6">
                         <dl className="dl-horizontal">
                             <dt className="small">Created by:</dt><dd>{owner}</dd>
-                            {/* <dt className="small">Fid:</dt><dd>{fid}</dd> */}
                             <dt className="small">Start Time:</dt><dd><a href="#">{startTime}</a></dd>
                             <dt className="small">Infuencers Fids:</dt><dd>{infuencersFidsString}</dd>
-                            {/* <dt className="small">Campaign Platfrom Fees:</dt><dd>{campaignPlatfromFees}</dd> */}
                         </dl>
                     </div>
                     <div className="col-6">
                         <dl className="dl-horizontal">
-                            {/* <dt className="small">Last Updated:</dt><dd>{lastRefreshTimeStamp}</dd> */}
                             <dt className="small">Fid:</dt><dd>{fid}</dd>
-                            {/* <dt className="small">Created:</dt><dd>{campaignTiemstamp}</dd> */}
                             <dt className="small">End Time:</dt><dd><a href="#">{endtTime}</a></dd>
                             <dt className="small">Campaign Total Points:</dt><dd>{campaignTotalPoints}</dd>
 
@@ -633,8 +568,6 @@ const ProjectDetails = () => {
 
 
                 <div className="my-4">
-                    {/* <form className="row g-3"> */}
-
 
                     <div className="col-12" style={{color:"#05B234"}}>
                         <h5>Infuencer Registration for Campaign</h5>
@@ -688,70 +621,26 @@ const ProjectDetails = () => {
 
                     </div>
 
-                    {/* </form> */}
                 </div>
 
 
+                <div className="px-4 py-3">
 
-                {/* <div className="my-4">
-                    <h5>Project tag</h5>
-                    <span className="badge bg-primary me-1" href="#">Photoshop</span>
-                    <span className="badge bg-secondary me-1" href="#">HTML, SCSS</span>
-                    <span className="badge bg-warning me-1" href="#">Laravel 7.0.0</span>
-                    <span className="badge bg-info" href="#">ReactJs</span>
-                </div> */}
-
-                {/* <h5>Project files</h5>
-                <ul className="list-unstyled d-flex flex-wrap">
-                    <li className="d-flex p-3 rounded bg-body dashed mb-1 me-1">
-                        <div className="avatar bg-card me-2 fs-5 d-flex align-items-center justify-content-center"><i className="fa fa-file-pdf-o"></i></div>
-                        <div>
-                            <h6 className="text-truncate mb-0">Design file.pdf</h6>
-                            <span className="file-size">2.7 mb</span>
+                {
+                    dataTT.length>0?
+                    (
+                            <DataTable columns={infuencer_columns} data={dataTT} />
+                    )
+                    :
+                    (
+                        <div className="d-flex justify-content-center align-items-center">
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
                         </div>
-                    </li>
-                    <li className="d-flex p-3 rounded bg-body dashed mb-1 me-1">
-                        <div className="avatar bg-card me-2 fs-5 d-flex align-items-center justify-content-center"><i className="fa fa-file-powerpoint-o"></i></div>
-                        <div>
-                            <h6 className="text-truncate mb-0">Design file.psd</h6>
-                            <span className="file-size">22.5 mb</span>
                         </div>
-                    </li>
-                    <li className="d-flex p-3 rounded bg-body dashed mb-1 me-1">
-                        <div className="avatar bg-card me-2 fs-5 d-flex align-items-center justify-content-center"><i className="fa fa-file-text-o"></i></div>
-                        <div>
-                            <h6 className="text-truncate mb-0">Project detail.doc</h6>
-                            <span className="file-size">2.8 mb</span>
-                        </div>
-                    </li>
-                </ul> */}
-
-
-
-        {/* <DataTable columns={columns} data={dataT} /> */}
-      {/* <div className="px-4 py-3 page-body"> */}
-      <div className="px-4 py-3">
-
-      {
-          dataTT.length>0?
-          (
-                <DataTable columns={infuencer_columns} data={dataTT} />
-          )
-
-          :
-          (
-            <div className="d-flex justify-content-center align-items-center">
-              <div className="spinner-border" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            </div>
-          )  
-        }
-      </div>
-
-
-
-
+                    )  
+                    }
+                </div>
 
             </div>
             

@@ -2,19 +2,14 @@
   "usersMenuItems": [
     { "link": "/app/my-profile", "label": "New" },
     { "link": "/app/account-settings", "label": "Details" },
-
-    { "link": "/app/infuencers", "label": "All" },
-
-    { "link": "/app/invoice", "label": "Good for Payments" }
+    { "link": "/app/infuencers", "label": "All" }
   ],
   "projectMenuItems": [
     { "link": "/app/new-campaign", "label": "New" },
     { "link": "/app/all-campaigns", "label": "All" },
     { "link": "/app/hot-campaigns", "label": "Hot" },
     { "link": "/app/campaign-details", "label": "Details" },
-
-    { "link": "/app/clients-list", "label": "Flow" },
-    { "link": "/app/analytics", "label": "DELETE Analytics" }
+    { "link": "/app/clients-list", "label": "Squawk Box" }
   ],
   "bootstrapMenuItems": [
     { "link": "/docs/accordion", "label": "Accordion" },

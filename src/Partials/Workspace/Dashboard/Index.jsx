@@ -73,7 +73,7 @@ const Index = () => {
 							<img className="mb-3" src={welcomelogo}/>
 							<div className="d-flex align-items-start">
 								<div className="ms-3">
-									<h2 className="mb-4 text-gradient title-font">A Smarter Way To Manage Your Social Campaigns</h2>
+									<h2 className="mb-4 text-gradient title-font">A Smarter Way To Manage Your Social Marketing Campaigns</h2>
 									<h5 className="mt-4 mb-1 text-muted">The Spark Tool Suite allows both companies and individuals to seemlessly operate their social campaigns.</h5>
 									<h5 className="mb-1 text-muted">Marketing objectives are achieved by extensively monitoring social interactivity using Onchain analysis, </h5>
 									<h5 className="mb-4 text-muted">resulting in timely automated payments to all of the project contributors.  </h5>
@@ -91,47 +91,52 @@ const Index = () => {
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingOne">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-											Is Turkish Delight Really Greek?
+											What is Spark?
 										</button>
 									</h3>
 									<div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Of course it is not. The answer is in the name.</div>
+										<div className="accordion-body">Spark is a decentralized marketing application. It aims to provide transparent and trsutless marketing campaign management solutions </div>
 									</div>
 								</div>
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingTwo">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-											Did Socrates know anything?
+											Where is Spark deployed?
 										</button>
 									</h3>
 									<div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">He lived until 80 years of age, so he knew how to avoid covid.</div>
+										<div className="accordion-body">Spark is a decentralized application built on Base as part of the On Chain Summer Hackathon. It is deployed both on Base-Sepolia and Base mainnet.</div>
 									</div>
 								</div>
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingThree">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-											Accordion Item #3
+											Who can use Spark?
 										</button>
 									</h3>
 									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+										<div className="accordion-body">Anyone can register and run marketing cmapaigns on Farcaster using Spark. You need to define a budget, a tagline a website url and a start and end time. Then let Spark and Influencers do their magic. See FAQ Guide for user guidance.</div>
 									</div>
 								</div>
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingFour">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-											Accordion Item #4
+											What are the key benefits of using Spark?
 										</button>
 									</h3>
 									<div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+										<div className="accordion-body">Some key benefits are that you can set a campaign budget as high or as low as you like. When you register a cmapaign you also state the points an
+											influencer will receive for a successful action such as Follow your account, Like any of your casts, recasting or replying to any of your casts, cast themselves mentioned 
+											your company Farcaster username and/or including your company tagline and/or your company website.
+											This ensures that at all times the both parties, the cmapaigner and the influencer are aware of the terms of the agreement and abide to it. 
+											Payment allocations to the influencers are done automatically by the smart contract on a proportional basis to the points they have earned against the total points earned by all influencers (campaign total points).
+										</div>
 									</div>
 								</div>
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingFive">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
-											Accordion Item #5
+											How does Spark make money?
 										</button>
 									</h3>
 									<div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
@@ -141,12 +146,13 @@ const Index = () => {
 
 							</div>
 						</div>
+
 						<div className="col-4">
 							<div className="accordion accordion-flush" id="accordionFlushExample2">
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingSix">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
-											Accordion Item #6
+											What happens at the payments at the end of a campaing period?
 										</button>
 									</h3>
 									<div id="flush-collapseSix" className="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample2">
@@ -156,7 +162,7 @@ const Index = () => {
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingSeven">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
-											Accordion Item #7
+											I am an infuencer, how do I get paid?
 										</button>
 									</h3>
 									<div id="flush-collapseSeven" className="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample2">
@@ -166,7 +172,7 @@ const Index = () => {
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingEight">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
-											Accordion Item #8
+											What is Spam Factor?
 										</button>
 									</h3>
 									<div id="flush-collapseEight" className="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample2">
@@ -176,7 +182,7 @@ const Index = () => {
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingNine">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
-											Accordion Item #9
+										How do I register a new campaign?
 										</button>
 									</h3>
 									<div id="flush-collapseNine" className="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample2">
@@ -186,7 +192,7 @@ const Index = () => {
 								<div className="accordion-item">
 									<h3 className="accordion-header" id="flush-headingTen">
 										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
-											Accordion Item #10
+										What is All and Hot campaigns?
 										</button>
 									</h3>
 									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
@@ -196,6 +202,84 @@ const Index = () => {
 
 							</div>
 						</div>
+
+
+
+						
+						<div className="col-4">
+							<div className="accordion accordion-flush" id="accordionFlushExample2">
+						
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingEight">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+											What is the Details page of a campaign?
+										</button>
+									</h3>
+									<div id="flush-collapseEight" className="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample2">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingNine">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+											What is Squawk Box?
+										</button>
+									</h3>
+									<div id="flush-collapseNine" className="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample2">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingTen">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+											I am an infuencer How do I register on the Platform?
+										</button>
+									</h3>
+									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+
+
+
+							
+
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingTen">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+											I am an infuencer How do I register for a campaign?
+										</button>
+									</h3>
+									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+
+								<div className="accordion-item">
+									<h3 className="accordion-header" id="flush-headingTen">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+											What is the Details page of an infuencer ?
+										</button>
+									</h3>
+									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
+										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									</div>
+								</div>
+
+						
+
+
+
+
+
+
+
+
+
+							</div>
+						</div>
+
+
 					</div>
 
 

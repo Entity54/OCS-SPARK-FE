@@ -32,3 +32,9 @@ Server side
    > When a campaign has paid funds then it will be of state Paid otherwise Void and the campaign owner can get his money back (minus paltform fees)
 
 ---
+
+# addresses
+
+Company runs Campaign "0x1cd96ab1aecc78c4d63b9d1bd8968d6549cf259b"
+Infuencer Artemis "0x1c4c9e20b858103aa7899586dcc118f8210b3737" Fid: 679934
+Infuencer Swkrates "0x9a9019106f099ccb7d3d75782611513185507f6c" Fid: 620429

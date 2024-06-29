@@ -468,7 +468,7 @@ const NewProject = () => {
                 <br/>
                 <br/>
 
-                <h5>Admin helper</h5>
+                {/* <h5>Admin helper</h5>
                 <div className="col-12">
                     <button type="button" className="btn btn-secondary me-1" 
                         onClick = { () => get_PendingCampaigns() }
@@ -515,7 +515,7 @@ const NewProject = () => {
                         onClick = { () => ADMINwithdrawPlatformFees() }
                     >ADMIN_withdrawPlatformFees Project</button>
                 
-                </div>
+                </div> */}
 
 
 <br/>

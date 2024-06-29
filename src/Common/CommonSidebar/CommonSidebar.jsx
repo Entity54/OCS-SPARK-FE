@@ -31,7 +31,7 @@ const CommonSidebar = ( {iconColor} ) => {
                 <div className="offcanvas-body flex-column custom_scroll ps-4 ps-xl-0">
                     <ul className={`list-unstyled mb-4 menu-list ${iconColor}`}>
                         <MenuItem 
-                        title="Dashboard-SPARK-INTRO" 
+                        title="Home" 
                         link="/index"
                         icon={
                         <svg className="svg-stroke" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -66,7 +66,7 @@ const CommonSidebar = ( {iconColor} ) => {
                         </svg>} 
                         menuItems={usersMenuItems} />
                         <MenuItem 
-                        title="File Manager-SPARK-ASSETS" 
+                        title="Admin" 
                         link="/app/filemanager"
                         icon={
                         <svg className="svg-stroke" xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -77,7 +77,7 @@ const CommonSidebar = ( {iconColor} ) => {
                         menuItems={[]} />
 
 
-                    <MenuItem 
+                    {/* <MenuItem 
                         title="My Wallet - SPARK-MAYBE" 
                         link="/my-wallet"           
                         icon={
@@ -86,7 +86,7 @@ const CommonSidebar = ( {iconColor} ) => {
                             <path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"></path>
                             <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4"></path>
                         </svg>}
-                        menuItems={[]} />
+                        menuItems={[]} /> */}
                     </ul>
                 </div>
             </div>
