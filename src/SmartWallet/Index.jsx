@@ -99,9 +99,9 @@ export default function BlueCreateWalletButton({ handleSWSuccess, handleSWError 
     // setup_wallet_SW(signer, chainIdNumber, chainName, address);
     setup_user_chain(signer, chainIdNumber, address);
     
-    setup_webhooks(0); //For testing with ngrok
-    // setup_webhooks(chainIdNumber);
-
+    // setup_webhooks(0); //For testing with ngrok
+    setup_webhooks(chainIdNumber);
+ 
 
     
 
