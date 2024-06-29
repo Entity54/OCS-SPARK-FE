@@ -1,3 +1,4 @@
+// INFLUENCER NEW
 import React, { useContext, useEffect, useState } from 'react';
 import { SparkContext } from '@SparkContext';
 
@@ -118,28 +119,9 @@ const MyProfile = () => {
                         <div className="row g-3 my-3">
 
 
-                        {/* <div className="my-3">
-                            <button className="btn btn-primary me-1">Follow</button>
-                            <button className="btn btn-dark">Message</button>
-                        </div> */}
-                        
-
-                        {/* <div className="my-3">
-                            <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                                <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-                                    <NeynarAuthButton />
-                                </div>
-                            </main>
-                        </div> */}
-
-
                         <div className="card-header bg-card pb-3">
-                            {/* <h6 className="card-title mb-0">My Profile</h6> */}
-                            {/* <div className="dropdown card-action">
-                                <CardAction/>
-                            </div> */}
+                   
                             <div className="d-flex align-items-md-start align-items-center flex-column flex-md-row mt-4 w-100">
-                                {/* <img src={profileImage} alt="" className="rounded-4"/> */}
                                 {
                                 influencer_pfp_url?
                                     <img src={influencer_pfp_url} alt="Profile image" className="rounded-4"/>
@@ -147,8 +129,6 @@ const MyProfile = () => {
                                     <img src="https://via.placeholder.com/300x200.png?text=Farcaster+Profile" alt="placeholder" className="rounded-4"/>
                                 }
 
-                                {/* <img src={influencer_pfp_url} alt="" className="rounded-4"/> */}
-                                {/* <img src="https://via.placeholder.com/300x200.png?text=Farcaster+Profile" alt="" className="rounded-4"/> */}
  
                                 <div className="media-body ms-md-5 m-0 mt-4 mt-md-0 text-md-start text-center">
                                     <h4 className="mb-1">{influencer_Username}</h4>
@@ -157,9 +137,6 @@ const MyProfile = () => {
 
 
                                     <div className="my-3">
-                                        {/* <button className="btn btn-primary me-1">Follow</button> */}
-                                        {/* <button className="btn btn-dark">Message</button> */}
-
 
                                         <div className="flex min-h-screen flex-col items-center justify-between p-24">
                                             <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -210,7 +187,6 @@ const MyProfile = () => {
                             </div>
 
 
-                            {/* </div> */}
                             <div className="col-sm-6 col-md-6">
                                 <label className="form-label small text-muted">Custody Address</label>
                                 <input type="text" disabled className="form-control" placeholder="Farcaster Account Custody Address" value={influencer_CustodyAddres}/>
@@ -228,70 +204,21 @@ const MyProfile = () => {
                             </div>
 
 
-                            {/* <div className="col-sm-6 col-md-3">
-                                <label className="form-label small text-muted">Followers Count</label>
-                                <input type="text" disabled className="form-control" placeholder="Farcaster Id" value={influencer_Followers_Count}/>
-                            </div>
-                            <div className="col-md-3">
-                                <label className="form-label small text-muted">Following Count</label>
-                                <input type="text" className="form-control" disabled placeholder="Farcaster Account Username" value={influencer_Following_Count}/>
-                            </div>
+                         
 
-                            <div className="col-md-3">
-                                <label className="form-label small text-muted">Active Status</label>
-                                <input type="text" className="form-control" disabled placeholder="Farcaster Account Username" value={influencer_active_status}/>
-                            </div>
 
-                            <div className="col-md-3">
-                                <label className="form-label small text-muted">Power Badge</label>
-                                <input type="text" className="form-control" disabled placeholder="Farcaster Account Username" value={influencer_HasPowerBadge?"Yes":"No"}/>
-                            </div> */}
 
-{/* 
-                            <div className="col-md-12">
-                                <label className="form-label small text-muted">Address</label>
-                                <input type="text" className="form-control" placeholder="Home Address" defaultValue="455 S. Airport St. Moncks Corner"/>
-                            </div>
-                            <div className="col-sm-6 col-md-4">
-                                <label className="form-label small text-muted">City</label>
-                                <input type="text" className="form-control" placeholder="City" defaultValue="New York"/>
-                            </div>
-                            <div className="col-sm-6 col-md-3">
-                                <label className="form-label small text-muted">Postal Code</label>
-                                <input type="number" className="form-control" placeholder="ZIP Code"/>
-                            </div>
-                            <div className="col-md-5">
-                                <label className="form-label small text-muted">Country</label>
-                                <select className="form-control custom-select">
-                                    <option defaultValue="">USA</option>
-                                </select>
-                            </div> */}
-
-                            {/* <div className="col-md-12">
-                                <label className="form-label small text-muted">About Me</label>
-                                <textarea disabled rows="5" className="form-control" placeholder="Here can be your description" value={influencer_AboutMe}>
-                                </textarea>
-                            </div> */}
+                        
 
                         </div>
-                        {/* <button type="submit" className="btn btn-primary">Register Profile</button> */}
                         
-                        {/* <div className="my-3">
-                            <button className="btn btn-primary me-1"
-                            
-                            >Register</button>
-                            <button className="btn btn-dark"
-                            
-                            >Cancel</button>
-                        </div> */}
+                    
 
                         <div className="col-12">
                             <button type="button" className="btn btn-primary"
                                 onClick = { () => register_infuencer_onPlatform() }
                             >Register On Platform</button>
-                            {/* <button type="button" className="btn btn-secondary me-1" style={{marginLeft:"10px"}}
-                                onClick = { () => resetCampaign() }
-                            >Cancel</button> */}
+                         
                         </div>
 
 

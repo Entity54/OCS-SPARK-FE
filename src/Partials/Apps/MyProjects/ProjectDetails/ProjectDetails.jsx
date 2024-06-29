@@ -336,13 +336,11 @@ const ProjectDetails = () => {
         }
         if (campaignUID) retrieveData();
     }, [campaignUID, lastRefreshTimeStamp]);  
-    // }, [lastRefreshTimeStamp]);  
-
 
 
     useEffect(() => {
         if (Table_List.length>0) prepareInfuencersData();
-        // refreshCampaign();  //UNCOMMNENT THIS TO KEEP REFRESHING
+        refreshCampaign();  //UNCOMMNENT THIS TO KEEP REFRESHING
         console.log(`CAMPAIGN DETAILS 2 refreshCampaign lastRefreshTimeStamp: `,new Date(lastRefreshTimeStamp));
     }, [Table_List]); 
 

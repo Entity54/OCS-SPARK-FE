@@ -1,3 +1,4 @@
+// INFUENCERS ALL GRID
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,25 +9,6 @@ import CardAction from '../../../Widgets/CardAction/CardAction'
 
 import { 
     getInfluencersUIDs, get_influencer,
-
-    createCampaign, 
-    getAccountInfo,
-    getPendingCampaigns,
-    getActiveCampaignUIDs,
-    getExpiredCampaignUIDs,
-    getReadyFroPaymentCampaignUIDs,
-    getCompletedCampaignUIDss,
-    get_Campaign_Specs,
-    get_Campaign_PointMarking,
-    get_Campaign_platform_fees,
-    get_withdrawable_platform_fees,
-    get_Campaign_isActive,
-    get_campaignBalances,
-    get_isCampaignDistributionComplete,
-    get_isCampaignPaymentsComplete,
-    ADMIN_withdrawPlatformFees,
-  
-    get_Formatted_Campaign_Specs
   } from "@Setup_EVM";
 
 
@@ -36,29 +18,6 @@ const ProjectGrid = () => {
     const { refreshCampaign, lastRefreshTimeStamp, broadcast_ChosenInfuencerFid } = useContext(SparkContext);
 
     const [cardFS, setCardFS] = useState(false);  
-
-    // const [title, setTitle]   = useState('');
-    // const [description, setDescription]   = useState('');
-
-    // const [status, setStatus]   = useState('');
-    // const [status_C, setStatus_C]   = useState('');
-    // const [state, setState]   = useState('');
-    // const [budget, setBudget]   = useState('');
-    // const [fid, setFid]   = useState('');
-
-    // const [startTime, setStartTime]   = useState('');
-    // const [endtTime, setEndTime]   = useState('');
-
-    // const [campaign_influencersFidsArray, setCampaign_influencersFidsArray] = useState([]); 
-    // const [infuencersFidsString, setInfuencersFidsString]   = useState('');
-    // const [progressPercent, setProgressPercent]   = useState("");
-    // const [campaignTotalPoints, setCampaignTotalPoints]   = useState("");
-
-    // const [endsInMins, setEndsInMins]   = useState("");
-    // const [startsInMins, setStartsInMins]   = useState("");
-   
-
-
     const [Table_List, setTable_List] = useState([]);  
 
     const base = "https://api.neynar.com/";
@@ -120,7 +79,7 @@ const ProjectGrid = () => {
             await get_InfluencersUIDs();
             setTable_List(Influencers_Table_List);
           
-            // refreshCampaign(); //UNCOMMENT THIS TO KEEP REFRESHING
+            refreshCampaign(); //UNCOMMENT THIS TO KEEP REFRESHING
             console.log(`retrieveData lastRefreshTimeStamp: `,new Date(lastRefreshTimeStamp));
         }
         retrieveData();
@@ -148,8 +107,6 @@ const ProjectGrid = () => {
                     )
                     :
                     (
-                        // {
-                        // GridData.map((data, index) => {
                         Table_List.map((data, index) => {
 
                         return(
@@ -159,18 +116,12 @@ const ProjectGrid = () => {
                                     <img className="avatar lg rounded-circle border border-3  rounded-4" src={data.pfp_url} alt="Profile image" />
                                     <div className="ms-3">
                                     <h4 className="mb-0 text-gradient title-font">@{data.displayName}</h4>
-                                    {/* <p className="text-muted small">@{"influencer_Displayname"}</p> */}
                                 </div>
 
-                                    {/* <span className="text-primary"><strong href="#" className="h6 card-title mb-0" style={{color:"white", marginLeft:"0px"}}>{data.displayName}</strong></span> */}
                                     <CardAction cardIsFullScreen={cardIsFullScreen} />
                                 </div>
                                 <div className="card-body">
-                                    {/* <div className="d-flex align-items-center mb-1">
-                                        <i className="fa fa-info-circle me-3"></i>
-                                        <span className="pe-2">Description: </span>
-                                        <span className=''>{`${data.fid}`}</span>
-                                    </div> */}
+                                  
                                     <div className="d-flex align-items-center mb-2">
                                         <i className="fa fa-credit-card me-3"></i>
                                         <span className="pe-2">Payable Address (ETH): </span>
@@ -183,11 +134,6 @@ const ProjectGrid = () => {
                                         <span className={`${"data.campaign_status_C"}`} >{data.ownerAddress}</span>
                                     </div>
 
-                                    {/* <div className="d-flex align-items-center mb-1">
-                                        <i className="fa fa-spinner me-3"></i>
-                                        <span className="pe-2">Spammer Factor: </span>
-                                        <span className={`${"data.status_c"}`} >{`${data.spammerFactor}`}</span>
-                                    </div> */}
 
                                     <div className="my-4">
                                         <span className="text-muted">Spammer Factor / {`${data.spammerFactor}`}</span>
@@ -213,19 +159,11 @@ const ProjectGrid = () => {
 
                                     <div className="d-flex align-items-center justify-content-between">
                                         <div className="avatar-list avatar-list-stacked d-flex">
-                                            {/* <span className="pe-3">Spammer Factor</span> */}
-                                            {/* <span className="pe-3">{`${data.spammerFactor}`}</span> */}
 
                                             <span className="pe-3 text-muted" style={{marginLeft:"0px"}}>Last update: {new Date(lastRefreshTimeStamp).toLocaleString()}</span>
 
-
-                                            {/* {data.team.map((img, index) => {
-                                                return(
-                                                <img key={index} className="avatar sm rounded-circle" src={img} data-bs-toggle="tooltip" title="Avatar"/>
-                                            )})} */}
                                         </div>
 
-                                        {/* <a href="#" data-bs-toggle="offcanvas" data-bs-target="#project_detail">View Detail</a> */}
                                         <Link key={index} to="/app/account-settings" onClick = { () => selectedInfuencer(data.fid) }>
                                             <span className="text-primary" >View Detail</span>
                                         </Link>
@@ -236,7 +174,6 @@ const ProjectGrid = () => {
                         </li>
                         )
                         })
-                        // }
 
                     )
                 }

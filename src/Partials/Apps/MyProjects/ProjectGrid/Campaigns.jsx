@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { SparkContext } from '@SparkContext';
 
-import { GridData } from './Components/ProjectGridData'
 import CardAction from '../../../Widgets/CardAction/CardAction'
 
 import { createCampaign, 
@@ -141,17 +140,7 @@ const ProjectGrid = () => {
             console.log(`retrieveData lastRefreshTimeStamp: `,new Date(lastRefreshTimeStamp));
         }
         retrieveData();
-    // }, []);  
     }, [lastRefreshTimeStamp]);  
-
-
-    // useEffect(() => {
-    // if (Table_List.length>0) prepareCampignData();
-    // // refreshCampaign(); //UNCOMMNENT THIS TO KEEP REFRESHING
-    // console.log(`refreshCampaign lastRefreshTimeStamp: `,new Date(lastRefreshTimeStamp));
-    // }, [Table_List]); 
-
-
 
 
   return (
@@ -175,8 +164,6 @@ const ProjectGrid = () => {
                     )
                     :
                     (
-                        // {
-                        // GridData.map((data, index) => {
                         Table_List.map((data, index) => {
 
                         return(
@@ -237,15 +224,8 @@ const ProjectGrid = () => {
                                             <span className="pe-3">{(data.campaign_influencersFids).length}</span>
 
                                             <span className="pe-3 text-muted" style={{marginLeft:"50px"}}>Last update: {new Date(lastRefreshTimeStamp).toLocaleString()}</span>
-
-
-                                            {/* {data.team.map((img, index) => {
-                                                return(
-                                                <img key={index} className="avatar sm rounded-circle" src={img} data-bs-toggle="tooltip" title="Avatar"/>
-                                            )})} */}
                                         </div>
 
-                                        {/* <a href="#" data-bs-toggle="offcanvas" data-bs-target="#project_detail">View Detail</a> */}
                                         <Link key={index} to="/app/campaign-details" onClick = { () => selectedCampaign(data.campaign_uuid) }>
                                             <span className="text-primary" >View Detail</span>
                                         </Link>
@@ -256,7 +236,6 @@ const ProjectGrid = () => {
                         </li>
                         )
                         })
-                        // }
 
                     )
                 }

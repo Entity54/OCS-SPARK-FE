@@ -1,4 +1,4 @@
-// import React from 'react'
+// SQUAWK BOX
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { SparkContext } from '@SparkContext';
 

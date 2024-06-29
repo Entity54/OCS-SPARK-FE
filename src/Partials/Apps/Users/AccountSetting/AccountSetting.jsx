@@ -1,15 +1,15 @@
+// INFLUENCER DETAILS
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { SparkContext } from '@SparkContext';
 
 
-import CardAction from '../../../Widgets/CardAction/CardAction'
 import General from './Components/General'
 import Billing from './Components/Billing'
-import Members from './Components/Members'
-import Security from './Components/Security'
-import Notifications from './Components/Notifications'
-
-import profileImage from '../../../../assets/images/profile_av.png';
+// import CardAction from '../../../Widgets/CardAction/CardAction'
+// import Members from './Components/Members'
+// import Security from './Components/Security'
+// import Notifications from './Components/Notifications'
+// import profileImage from '../../../../assets/images/profile_av.png';
 
 
 import { createCampaign, 
@@ -23,10 +23,8 @@ const AccountSetting = () => {
 
 
     const [activeTab, setActiveTab] = useState('setting-general');
-
     const [influencerFid, setInfluencerFid]   = useState('');
     const [inputFid, setInputFid]   = useState('620429');
-
     const [influencer_Fid, setInfluencer_Fid] = useState('');
     const [influencer_Username, setInfluencer_Username] = useState('');
     const [influencer_Displayname, setInfluencer_Displayname] = useState('');
@@ -39,19 +37,13 @@ const AccountSetting = () => {
     const [influencer_Following_Count, setInfluencer_Following_Count] = useState('');
     const [influencer_HasPowerBadge, setInfluencer_HasPowerBadge] = useState('');
     const [influencer_AboutMe, setInfluencer_AboutMe] = useState('');
-
     const [influencer_ownerAddress, setInfluencer_ownerAddress] = useState('');
     const [influencer_spamFactor, setInfluencer_spamFactor] = useState('');
 
 
 
-
-
-
     const base = "https://api.neynar.com/";
-    // const apiKey = process.env.NEYNAR_API_KEY;
     const apiKey = import.meta.env.VITE_NEYNAR_API_KEY;
-
 
 
     const getUserInfo_withFid = async () => {
@@ -84,10 +76,6 @@ const AccountSetting = () => {
         setInfluencer_ownerAddress(infuencerStruct.ownerAddress);
         setInfluencer_spamFactor(infuencerStruct.spammerFactor);
     }
-
-
-
-
 
 
     const chooseInfuencer = (choosenFid) => {
@@ -173,20 +161,10 @@ const AccountSetting = () => {
                 <br/>
 
 
-
-
-
-
-
-                {/* <h6 className="card-title mb-0">Infuencer Profile</h6> */}
-                {/* <div className="dropdown card-action">
-                    <CardAction/>
-                </div> */}
                 <div className="w-100 mt-4">
                     <ul className="row g-lg-4 g-2 list-unstyled li_animate mb-4 mb-lg-5">
                         <li className="col-xl-4 col-lg-5 col-md-5 col-12">
                             <div className="d-flex align-items-center">
-                                {/* <img className="avatar lg rounded-circle border border-3" src={profileImage} alt="avatar"/> */}
                                 {
                                 influencer_pfp_url?
                                     <img className="avatar lg rounded-circle border border-3  rounded-4" src={influencer_pfp_url} alt="Profile image" />
@@ -205,15 +183,9 @@ const AccountSetting = () => {
                                 <li className="px-lg-4 px-3 ps-0">
                                     <p className="text-uppercase text-muted small mb-1">Campaigns Participated</p>
                                     <div className="d-flex align-items-center"><span className="h4 mb-0">54</span> 
-                                    {/* <a className="btn btn-sm btn-outline-primary ms-2" href="#!">Upgrade</a> */}
                                     </div>
                                 </li>
-                                {/* <li className="px-lg-4 px-3 border-start">
-                                    <p className="text-uppercase text-muted small mb-1">Total Points</p>
-                                    <div className="d-flex align-items-center"><span className="h4 mb-0">Staff</span>
-                                    <a className="btn btn-sm btn-dark ms-2" href="#!">Change</a>
-                                    </div>
-                                </li> */}
+                             
                             </ul>
                         </li>
                     </ul>
@@ -230,24 +202,6 @@ const AccountSetting = () => {
                                 <span className="ps-1">Billing</span>
                             </a>
                         </li>
-                        {/* <li className="nav-item">
-                            <a className={`nav-link px-0 me-xl-4 me-3 fs-6 ${activeTab === 'setting-members' ? 'active' : ''}`} data-bs-toggle="tab" href="#" onClick={() => handleTabClick('setting-members')}>
-                                <i className="fa fa-users"></i>
-                                <span className="ps-1">Members</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className={`nav-link px-0 me-xl-4 me-3 fs-6 ${activeTab === 'setting-security' ? 'active' : ''}`} data-bs-toggle="tab" href="#" onClick={() => handleTabClick('setting-security')}>
-                                <i className="fa fa-shield"></i>
-                                <span className="ps-1">Security</span>
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className={`nav-link px-0 me-xl-4 me-3 fs-6 ${activeTab === 'setting-notifications' ? 'active' : ''}`} data-bs-toggle="tab" href="#" onClick={() => handleTabClick('setting-notifications')}>
-                                <i className="fa fa-bell"></i>
-                                <span className="ps-1">Notifications</span>
-                            </a>
-                        </li> */}
                     </ul>
                 </div>
             </div>
@@ -276,15 +230,7 @@ const AccountSetting = () => {
                         
                         />
                     </div>
-                    {/* <div id="setting-members" className={`tab-pane ${activeTab === 'setting-members' ? 'active' : ''}`}>
-                        <Members/>
-                    </div> */}
-                    {/* <div id="setting-security" className={`tab-pane ${activeTab === 'setting-security' ? 'active' : ''}`}>
-                        <Security/>
-                    </div> */}
-                    {/* <div id="setting-notifications" className={`tab-pane ${activeTab === 'setting-notifications' ? 'active' : ''}`}>
-                        <Notifications/>
-                    </div> */}
+              
                 </div>
             </div>
         </div>

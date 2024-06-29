@@ -3,9 +3,13 @@ import { CoinbaseWalletSDK } from '@coinbase/wallet-sdk';
 import { CoinbaseWalletLogo } from './CoinbaseWalletLogo';
  
 import { ethers } from 'ethers';
-import { setup_user_chain, setup_wallet_SW } from "@Setup_EVM";
+import { setup_user_chain, 
+  // setup_wallet_SW 
+} from "@Setup_EVM";
 import { setup_webhooks } from "@WebhoooksManagement";
 
+
+import logo from '../assets//Logos/l7.png';
 
 import UserDropdown from '../Partials/Widgets/UserDropdown/UserDropdownConnected';
 
@@ -31,6 +35,7 @@ const buttonStyles = {
 const sdk = new CoinbaseWalletSDK({
   appName: 'Spark',
   appLogoUrl: 'https://example.com/logo.png',
+  // appLogoUrl: logo,
   appChainIds: [84532,8453],
 });
   
@@ -91,7 +96,7 @@ export default function BlueCreateWalletButton({ handleSWSuccess, handleSWError 
         setNetwork({chainIdNumber, chainIdHex, chainName, alt_chainIdNumber, alt_chainIdHex, alt_chainName,});
 
 
-    setup_wallet_SW(signer, chainIdNumber, chainName, address);
+    // setup_wallet_SW(signer, chainIdNumber, chainName, address);
     setup_user_chain(signer, chainIdNumber, address);
     
     setup_webhooks(0); //For testing with ngrok

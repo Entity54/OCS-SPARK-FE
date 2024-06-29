@@ -1,4 +1,3 @@
-// import React from 'react'
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import { SparkContext } from '@SparkContext';
 
@@ -182,7 +181,6 @@ const NewProject = () => {
         console.log("withdrawableplatformfees: ",response);
     }
 
-
     useEffect(() => {
         setCampaignEthereumAddress(contextAccount);
     }, [contextAccount]);    
@@ -192,13 +190,6 @@ const NewProject = () => {
 
         //#region Date and Time Picker
         Inputmask({ "mask" : "(999) 999-9999" }).mask(".phone-number");
-
-        // flatpickr('.f-basic', {
-        //     enableTime: true,
-        //     dateFormat: 'Y-m-d H:i',
-        // });
-
-        // Select2('.select2');
           
         // Initialize Flatpickr on the input field for the Start Date & Time
         if (dateInputSTARTRef.current) {
@@ -270,17 +261,7 @@ const NewProject = () => {
                     </div>
                 </div>
 
-                {/* <div className="col-md-6">
-                    <div className="form-floating">
-                        <select className="form-select">
-                            <option defaultValue="selected">Select client</option>
-                            <option value="1">Client One</option>
-                            <option value="2">Client Two</option>
-                            <option value="3">Client Three</option>
-                        </select>
-                        <label>Client</label>
-                    </div>
-                </div> */}
+           
                 <div className="col-md-6">
                     <div className="form-floating">
                         <input className="form-control" type="text" value={campaignEthereumAddress} placeholder="Budget"
@@ -298,12 +279,6 @@ const NewProject = () => {
                     </div>
                 </div>
 
-                {/* <div className="col-sm-6 col-12">
-                    <div className="form-floating">
-                        <input className="form-control" type="date" placeholder="StartDate"/>
-                        <label>StartDate</label>
-                    </div>
-                </div> */}
 
                 <div className="mb-3 col-md-6 col-12">
                     <label className="col-form-label">Start Date & Time</label>
@@ -330,13 +305,6 @@ const NewProject = () => {
                     </fieldset>
                 </div>
 
-
-                {/* <div className="col-sm-6 col-12">
-                    <div className="form-floating">
-                        <input className="form-control" type="date" placeholder="Deadline"/>
-                        <label>Deadline</label>
-                    </div>
-                </div> */}
 
                 <br/>
                 <br/>
@@ -410,13 +378,6 @@ const NewProject = () => {
                         <label>Action - Embed Company URL in Cast</label>
                     </div>
                 </div>
-                {/* <div className="col-md-3">
-                    <div className="form-floating">
-                        <input className="form-control" type="text" placeholder="Budget"/>
-                        <label>Action - Contain Company Tagline in Cast</label>
-                    </div>
-                </div> */}
-   
 
                 <br/>
                 <br/>
@@ -456,141 +417,6 @@ const NewProject = () => {
                         onClick = { () => resetCampaign() }
                     >Cancel</button>
                 </div>
-
-
-
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-
-                {/* <h5>Admin helper</h5>
-                <div className="col-12">
-                    <button type="button" className="btn btn-secondary me-1" 
-                        onClick = { () => get_PendingCampaigns() }
-                    >getPendingCampaigns
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_ActiveCampaignUIDs() }
-                    >getActiveCampaignUIDs
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_ExpiredCampaignUIDs() }
-                    >getExpiredCampaignUIDs
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_ReadyFroPaymentCampaignUIDs() }
-                    >getReadyFroPaymentCampaignUIDs
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_CampaignSpecs() }
-                    >get_Campaign_Specs
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_CampaignPointMarking() }
-                    >get_Campaign_PointMarking
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_Campaignplatformfees() }
-                    >get_Campaign_platform__fees
-                    </button>
-
-                    <button type="button" className="btn btn-secondary me-1"  
-                        onClick = { () => get_withdrawableplatformfees() }
-                    >get_withdrawable_platform_fees
-                    </button>
-
-
-                    <button type="button" className="btn btn-primary"
-                        onClick = { () => ADMINwithdrawPlatformFees() }
-                    >ADMIN_withdrawPlatformFees Project</button>
-                
-                </div> */}
-
-
-<br/>
-<br/>
-<br/>
-
-
-{/* 
-                <div className="col-sm-6 col-12">
-                    <div className="form-floating">
-                        <select className="form-select">
-                            <option defaultValue="selected">Select privacy</option>
-                            <option value="1">Data Privacy One</option>
-                            <option value="2">Data Privacy Two</option>
-                            <option value="3">Data Privacy Three</option>
-                        </select>
-                        <label>Project privacy</label>
-                    </div>
-                </div>
-
-                <div className="col-sm-6 col-12">
-                    <div className="form-floating">
-                        <select className="form-select">
-                            <option defaultValue="selected">Select team</option>
-                            <option value="1">Team One</option>
-                            <option value="2">Team Two</option>
-                            <option value="3">Team Three</option>
-                        </select>
-                        <label>Team </label>
-                    </div>
-                </div>
-
-                <div className="col-sm-6 col-12">
-                    <div className="form-floating">
-                        <select className="form-select">
-                            <option defaultValue="selected">Select assignees </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                        </select>
-                        <label>People </label>
-                    </div>
-                </div>
-                <div className="col-sm-6 col-12">
-                    <div className="form-floating">
-                        <select className="form-select">
-                            <option defaultValue="selected">Select admin</option>
-                            <option value="1">Data Privacy One</option>
-                            <option value="2">Data Privacy Two</option>
-                            <option value="3">Data Privacy Three</option>
-                        </select>
-                        <label>Project Lead</label>
-                    </div>
-                </div>
-
-
-                <div className="col-12">
-                    <div className="form-floating">
-                        <select className="form-select">
-                            <option defaultValue="selected">Select task view</option>
-                            <option value="1">technical</option>
-                            <option value="2">external</option>
-                            <option value="3">organizational</option>
-                        </select>
-                        <label>Defult task view</label>
-                    </div>
-                </div>
-
-                <div className="col-12">
-                    <div className="form-floating">
-                        <textarea className="form-control" placeholder="Leave a comment here" style={{height: "100px"}}></textarea>
-                        <label>Project overview</label>
-                    </div>
-                </div> */}
-
 
             </form>
         </div>
