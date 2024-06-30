@@ -4,7 +4,7 @@ import { ethers, Wallet } from "ethers";
 
 // ************************** Import ABIs **************************
 import CampaignManager_raw from './Abis/CampaignManager.json';  
-import InfuencersManager_raw from './Abis/InfluencersManager.json';
+import InfluencersManager_raw from './Abis/InfluencersManager.json';
 import CampaignAssets_raw from './Abis/CampaignAssets.json';
 import SquawkProcessor_raw from './Abis/SquawkProcessor.json';
 import deploymentData from "./DeploymentData.json";
@@ -72,7 +72,7 @@ const chainSpecs = {
 		chainWallet: "", //public_signer.connect(chainProvider),
 		contracts: {
 			CampaignManager: "", 
-			InfuencersManager:"", 
+			InfluencersManager:"", 
             CampaignAssets: "",
 		},
 	},
@@ -84,7 +84,7 @@ const chainSpecs = {
 		chainWallet: "", 
 		contracts: {
 			CampaignManager: "", 
-			InfuencersManager:"", 
+			InfluencersManager:"", 
             CampaignAssets: "",
 		},
 	},
@@ -104,7 +104,7 @@ const setupContracts = async () => {
 			chain.contracts =
 			{
 				CampaignManager: new ethers.Contract( deploymentData["CampaignManager"][chain.chainName]["address"] , CampaignManager_raw.abi , chain.chainProvider ), 
-				InfuencersManager: new ethers.Contract( deploymentData["InfuencersManager"][chain.chainName]["address"] , InfuencersManager_raw.abi , chain.chainProvider ),
+				InfluencersManager: new ethers.Contract( deploymentData["InfluencersManager"][chain.chainName]["address"] , InfluencersManager_raw.abi , chain.chainProvider ),
 				CampaignAssets: new ethers.Contract( deploymentData["CampaignAssets"][chain.chainName]["address"] , CampaignAssets_raw.abi , chain.chainProvider ),
 				SquawkProcessor: new ethers.Contract( deploymentData["SquawkProcessor"][chain.chainName]["address"] , SquawkProcessor_raw.abi , chain.chainProvider ),
 			};
@@ -116,8 +116,8 @@ const setupContracts = async () => {
 
 
 let provider_Admin;
-let CampaignManager_admin, InfuencersManager_admin, CampaignAssets_admin, SquawkProcessor_admin;
-let CampaignManager_user, InfuencersManager_user, CampaignAssets_user, SquawkProcessor_user, userChainName, userAddress;
+let CampaignManager_admin, InfluencersManager_admin, CampaignAssets_admin, SquawkProcessor_admin;
+let CampaignManager_user, InfluencersManager_user, CampaignAssets_user, SquawkProcessor_user, userChainName, userAddress;
 // SETTING UP USER CHAIN CONNECTION REFERENCES TO SMART CONTRACTS
 const setup_user_chain = async (wallet, chainId, walletAddress) => {
         const userChain 		= chainSpecs[chainId];
@@ -130,14 +130,14 @@ const setup_user_chain = async (wallet, chainId, walletAddress) => {
 
         provider_Admin 			= userChain.chainProvider;
         CampaignManager_admin 	= userChain.contracts.CampaignManager;
-        InfuencersManager_admin = userChain.contracts.InfuencersManager;
+        InfluencersManager_admin = userChain.contracts.InfluencersManager;
         CampaignAssets_admin    = userChain.contracts.CampaignAssets;
         SquawkProcessor_admin    = userChain.contracts.SquawkProcessor;
 
 
        // User References and Contracts
         CampaignManager_user   = new ethers.Contract( deploymentData["CampaignManager"][userChainName]["address"] , CampaignManager_raw.abi , wallet );
-        InfuencersManager_user = new ethers.Contract( deploymentData["InfuencersManager"][userChainName]["address"] , InfuencersManager_raw.abi , wallet );
+        InfluencersManager_user = new ethers.Contract( deploymentData["InfluencersManager"][userChainName]["address"] , InfluencersManager_raw.abi , wallet );
 	    CampaignAssets_user    = new ethers.Contract( deploymentData["CampaignAssets"][userChainName]["address"] , CampaignAssets_raw.abi , wallet );
 	    SquawkProcessor_user    = new ethers.Contract( deploymentData["SquawkProcessor"][userChainName]["address"] , SquawkProcessor_raw.abi , wallet );
 
@@ -344,17 +344,17 @@ const get_campaignEmbed = async (campaign_uuid) => {
 
 
 const get_influencer = async (fid=0) => {
-	const influencerSruct =  await InfuencersManager_admin.influencers(fid);
+	const influencerSruct =  await InfluencersManager_admin.influencers(fid);
 	console.log(`influencerSruct: `,influencerSruct);
 	return influencerSruct;
 }
 const getInfluencersUIDs = async () => {
-	const influencersUIDs =  await InfuencersManager_admin.get_influencersUIDs();
+	const influencersUIDs =  await InfluencersManager_admin.get_influencersUIDs();
 	console.log(`influencersUIDs: `,influencersUIDs);
 	return influencersUIDs;
 }
 const infuencerRegisteredForCampaign = async (campaign_uuid,influencer_fid) => {
-	const isRegistered =  await InfuencersManager_admin.isCampaignInfuencer(campaign_uuid,influencer_fid);
+	const isRegistered =  await InfluencersManager_admin.isCampaignInfuencer(campaign_uuid,influencer_fid);
 	console.log(`isRegistered: `,isRegistered);
 	return isRegistered;
 }
@@ -362,14 +362,14 @@ const infuencerRegisteredForCampaign = async (campaign_uuid,influencer_fid) => {
 
 
 const get_total_campaign_score = async (campaignUID) => {
-	const total_campaign_points_BigInt =  await InfuencersManager_admin.total_campaign_score(campaignUID);
+	const total_campaign_points_BigInt =  await InfluencersManager_admin.total_campaign_score(campaignUID);
     const total_campaign_points = `${total_campaign_points_BigInt}`;
 	console.log(`total_campaign_points: `,total_campaign_points);
 	return total_campaign_points;
 }
 
 const get_infuencer_PointsArray_for_Campaign = async (campaignUID, influencerFid) => {
-    const infuencer_Points_BigInt =  await InfuencersManager_admin.getCampaignScoresForInfluencer(campaignUID, influencerFid);
+    const infuencer_Points_BigInt =  await InfluencersManager_admin.getCampaignScoresForInfluencer(campaignUID, influencerFid);
     const infuencer_PointsArray = infuencer_Points_BigInt.map((points) => `${points}`);
     console.log(`infuencer_PointsArray: `,infuencer_PointsArray);
     return infuencer_PointsArray;
@@ -529,7 +529,7 @@ const registerInfluencer = async (influencer_fid, custodyAddress, verifiedAccoun
 	return new Promise (async (resolve,reject) => {
 		console.log(`registerInfluencer influencer_fid: ${influencer_fid} custodyAddress: ${custodyAddress} verifiedAccount: ${verifiedAccount}`);
 		try {
-			const tx=  await InfuencersManager_user.registerInfluencer(influencer_fid,custodyAddress,verifiedAccount);
+			const tx=  await InfluencersManager_user.registerInfluencer(influencer_fid,custodyAddress,verifiedAccount);
 			const receipt = await tx.wait();
 			if (receipt.status === false) {
 				throw new Error(`Transaction registerInfluencer failed`);
@@ -550,7 +550,7 @@ const registerToCampaign = async (campaign_uuid) => {
 	return new Promise (async (resolve,reject) => {
 		console.log(`registerToCampaign campaign_uuid: ${campaign_uuid}`);
 		try {
-			const tx=  await InfuencersManager_user.registerToCampaign(campaign_uuid);
+			const tx=  await InfluencersManager_user.registerToCampaign(campaign_uuid);
 			const receipt = await tx.wait();
 			if (receipt.status === false) {
 				throw new Error(`Transaction registerToCampaign failed`);

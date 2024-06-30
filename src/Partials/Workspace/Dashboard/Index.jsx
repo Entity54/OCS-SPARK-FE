@@ -95,7 +95,10 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Spark is a decentralized marketing application. It aims to provide transparent and trsutless marketing campaign management solutions </div>
+										<div className="accordion-body">Spark is a decentralized marketing management application. It aims to provide transparent and trustless marketing campaign management solutions.
+										<br/><br/>Disclaimer: Spark is part of the On Base Chain Summer Hackathon and is a prototype. It has not been audited and is not ready for production. Loss of funds is possible.
+										
+										 </div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -105,7 +108,9 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Spark is a decentralized application built on Base as part of the On Chain Summer Hackathon. It is deployed both on Base-Sepolia and Base mainnet.</div>
+										<div className="accordion-body">Spark is a decentralized application built on Base as part of the On Chain Summer Hackathon. It is deployed both on Base mainnet and Base-Sepolia testnet. Ensure what chain you are connected to by clicking the Smart Wallet at the top right corner
+										Ensure your account has some ETH to pay for gas fees and campaign budget if you plan on launching a campaign (Click the connected account address to see your balance and top up if needed)
+										</div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -115,7 +120,7 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Anyone can register and run marketing cmapaigns on Farcaster using Spark. You need to define a budget, a tagline a website url and a start and end time. Then let Spark and Influencers do their magic. See FAQ Guide for user guidance.</div>
+										<div className="accordion-body">Anyone can register and run marketing campaigns on Farcaster using Spark. You need to define a budget, a tagline, a website or frame url and a start and end time. Then let Spark and Influencers do their magic.</div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -125,10 +130,10 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseFour" className="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Some key benefits are that you can set a campaign budget as high or as low as you like. When you register a cmapaign you also state the points an
-											influencer will receive for a successful action such as Follow your account, Like any of your casts, recasting or replying to any of your casts, cast themselves mentioned 
-											your company Farcaster username and/or including your company tagline and/or your company website.
-											This ensures that at all times the both parties, the cmapaigner and the influencer are aware of the terms of the agreement and abide to it. 
+										<div className="accordion-body">Some key benefits are that you can set a campaign budget as high or as low as you like. When you register a campaign you also state the points an
+											influencer will receive for a successful action such as Follow your account, Like any of your casts, recasting or replying to any of your casts, cast themselves mentioning 
+											your company Farcaster username and/or including your company tagline and/or your company website or frame.
+											This ensures that at all times both parties, the campaigner and the influencer are aware of the terms of the agreement and abide to these. 
 											Payment allocations to the influencers are done automatically by the smart contract on a proportional basis to the points they have earned against the total points earned by all influencers (campaign total points).
 										</div>
 									</div>
@@ -140,7 +145,7 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseFive" className="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+										<div className="accordion-body">Spark charges a fee of 10% of a campaign budget. All payments are done in ETH</div>
 									</div>
 								</div>
 
@@ -156,7 +161,7 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseSix" className="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+										<div className="accordion-body">At the end of the campaign period, the total points acrued for the campaign and for each Influencer is known. The distribution of each Infuencer is calculated based on his/her total points against the total campaign points. This percentage is then mutliplied with the 90% of the campaign Budget. (Spark charges a 10% fee of the Budget). Budget and all payments are done in ETH</div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -166,7 +171,7 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseSeven" className="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+										<div className="accordion-body">When an Infuencer registers in the Spark Protocol, an Ethereum account that belongs to his/her verified Farcaster Accounts is registered. This is the account the Influencer will receive campaign fees based on his points performance</div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -176,7 +181,11 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseEight" className="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+										<div className="accordion-body">Since every campaign has a score card with points allocated per Farcaster action and since the points an Influencer accrues are dependant on the Farcaster action he/she performs x the number of follower he/she has 
+										then there must be a way to deduct these points back if an action is negated e.g. a previous liked cast is unliked. To also avoid the case where the Influencer tries to game the system with fake followers, we have introduced the Spam Factor. 
+										Each Infuencer starts with Spam Factor 1. This means that the total points deducted when an action is negated e.g. a re-cast is deleted is a factor of the action mark as per the campaign mark card x the Infuencer's number of followers x Spam Factor. 
+										But each time an action is negated the Spam factor doubles resolving quickly in the Infuencer ending up with zero points for that campaign and having to restart again. The Infuencer's Spam factor is also a global feature for his/her profile i.e. for any new campaign the Spam Factor is the same.
+										If an Infuencer reaches zero points the Spam Factor reverts to its original value of 1 </div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -186,7 +195,11 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseNine" className="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+										<div className="accordion-body">After Connecting with the Smart Wallet, head to the Campaigns/New , fill in the Campaign Title, Description the Farcaster Id (Fid) that the campaign will cast messages, the Ethereum account that pays for the campaign budget fess,
+										as a default this is the connected Smart Wallet account and the Budget fee in ETH that you are willing to spend for this campaign
+										Next define a start and end date for the campaign and the points that an Influencer will receive for each action. The actions are Follow your account, Like any of your casts, recasting or replying to any of your casts, casting themselves mentioning your company Farcaster username and/or including your company tagline and/or your company embed url (website or frame).
+										Url Embed and Tag Line are the campaign assets. These are the url and or taglines that depict this campaign and you would like the infuencers to include in their casts. Finally click  "Create Campaign"
+										</div>
 									</div>
 								</div>
 								<div className="accordion-item">
@@ -196,7 +209,8 @@ const Index = () => {
 										</button>
 									</h3>
 									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+										<div className="accordion-body">All campaigns page has the list of all campaigns on the protocol. This includes pending, active, paid and void campaigns and it is a reference point for analytics e.g. if one wants to compare campaigns scores and run A/B tests
+										The Hot campaigns incudes only the pending and active campaigns that an Infuencer can register for. </div>
 									</div>
 								</div>
 
@@ -207,62 +221,75 @@ const Index = () => {
 
 						
 						<div className="col-4">
-							<div className="accordion accordion-flush" id="accordionFlushExample2">
+							<div className="accordion accordion-flush" id="accordionFlushExample3">
 						
 								<div className="accordion-item">
-									<h3 className="accordion-header" id="flush-headingEight">
-										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEight" aria-expanded="false" aria-controls="flush-collapseEight">
+									<h3 className="accordion-header" id="flush-headingEleven">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
 											What is the Details page of a campaign?
 										</button>
 									</h3>
-									<div id="flush-collapseEight" className="accordion-collapse collapse" aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									<div id="flush-collapseEleven" className="accordion-collapse collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlushExample3">
+										<div className="accordion-body">
+											One can either input the Campaign uid he cares about or arrive to this page by clicking on the relevant campaign title in the All page or View Details in the Hot campaigns page.
+											In the Details page of a campaign you can see the campaign details, the campaign score card, the campaign assets, the campaign budget and the campaign actions. You can also see the list of influencers that have registered for the campaign and their points performance.	
+											Furthermore when the campaign is active you can see the campaign progress bar. When the campaign is completed you can see the campaign total points, for each participating infuencer his/her total points but also points per specific action performed
+											and the ETH amounts sent to each Infuencer.
+											Finall there is a button "Sing in With Neynar " that allows you to sign in with Neynar and then click the Register To Campaign button for an Infuencer to register for this campaign.
+											Note: It is important that the Infuencer is already registered to the Spark Protocol, which is only required once
+										</div>
 									</div>
 								</div>
 								<div className="accordion-item">
-									<h3 className="accordion-header" id="flush-headingNine">
-										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+									<h3 className="accordion-header" id="flush-headingTwelve">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
 											What is Squawk Box?
 										</button>
 									</h3>
-									<div id="flush-collapseNine" className="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									<div id="flush-collapseTwelve" className="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlushExample3">
+										<div className="accordion-body">For active campaigns and actions performed by Infuencers registered to campaigns, Spark webhook server feeds the Spark SquawkProcessor smart contract
+											Therefore Squawk box is a list of historical time series Farcaster actions elegible for points being awarded or deducted, as stored in the SquawkProcessor smart contract.
+										</div>
 									</div>
 								</div>
 								<div className="accordion-item">
-									<h3 className="accordion-header" id="flush-headingTen">
-										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+									<h3 className="accordion-header" id="flush-headingThirteen">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThirteen" aria-expanded="false" aria-controls="flush-collapseThirteen">
 											I am an infuencer How do I register on the Platform?
 										</button>
 									</h3>
-									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									<div id="flush-collapseThirteen" className="accordion-collapse collapse" aria-labelledby="flush-headingThirteen" data-bs-parent="#accordionFlushExample3">
+										<div className="accordion-body">
+											Registration is done via the Smart Wallet and Sign in with Neynar. You need to connect your Smart Wallet to the Spark Protocol. Once connected you can Sign in with Neynar. This will read 
+											your Farcaster profile and a Farcaster verified ethereum address which will be the address you receive any funds when a completed campaign is paid out.
+											An Influencer is only required to register once on the Spark protocol. Once registered you can register for any campaign you like.
+										</div>
 									</div>
 								</div>
 
-
-
-							
-
 								<div className="accordion-item">
-									<h3 className="accordion-header" id="flush-headingTen">
-										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+									<h3 className="accordion-header" id="flush-headingFourteen">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFourteen" aria-expanded="false" aria-controls="flush-collapseFourteen">
 											I am an infuencer How do I register for a campaign?
 										</button>
 									</h3>
-									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									<div id="flush-collapseFourteen" className="accordion-collapse collapse" aria-labelledby="flush-headingFourteen" data-bs-parent="#accordionFlushExample3">
+										<div className="accordion-body">Either visit the Campaign details page and insert the campaign uid or choose the campaign you are interested in from the Hot campaigns by clicking View details 
+											Once on the Campaign/Details page, sign in with Neynar (Ensure you are connected with the Smart Wallet) and click the Register To Campaign button.  
+										</div>
 									</div>
 								</div>
 
 								<div className="accordion-item">
-									<h3 className="accordion-header" id="flush-headingTen">
-										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTen" aria-expanded="false" aria-controls="flush-collapseTen">
+									<h3 className="accordion-header" id="flush-headingFifteen">
+										<button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFifteen" aria-expanded="false" aria-controls="flush-collapseFifteen">
 											What is the Details page of an infuencer ?
 										</button>
 									</h3>
-									<div id="flush-collapseTen" className="accordion-collapse collapse" aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample2">
-										<div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
+									<div id="flush-collapseFifteen" className="accordion-collapse collapse" aria-labelledby="flush-headingFifteen" data-bs-parent="#accordionFlushExample3">
+										<div className="accordion-body">The Details page for an Influencer shows the influencer username, Farcaster id (Fid), number of followers, Spam Factor and the Smart Wallet account used to register this Influencer.
+										One can either insert the Infuencer Fid he cares about or arrive to this page by clicking on the relevant Influencer in the All page.
+										</div>
 									</div>
 								</div>
 
