@@ -32,7 +32,7 @@ const FileManager = () => {
     const dateInputSTARTRef = useRef(null);
     const dateInputENDRef = useRef(null);
 
-	const [campaignTitle, setCampaignTitle]   = useState("Dream Cars Marketing Campaign");
+	const [campaignTitle, setCampaignTitle]   = useState("Live your Dreams one");
 	const [campaignFID, setCampaignFID]   = useState("723628");
 	const [campaignDescription, setCampaignDescription]   = useState("This is a marketing campaign for a dream company");
 	const [campaignEthereumAddress, setCampaignEthereumAddress]   = useState("");
@@ -48,7 +48,7 @@ const FileManager = () => {
     const [actionContainCompanyTaglineInCast, setActionContainCompanyTaglineInCast]   = useState("6");
     const [actionEmbedCompanyURLInCast, setActionEmbedCompanyURLInCast]   = useState("7");
 
-    const [urlEmbed1, setUrlEmbed1]   = useState("https://www.example-dream-cars.com");
+    const [urlEmbed1, setUrlEmbed1]   = useState("https://www.example-dream-holidays-1.com");
     const [tagLine1, setTagLine1]   = useState("Yolo Dream Cars");
 
 
@@ -246,16 +246,16 @@ const FileManager = () => {
                         <input className="form-control" type="text" value={campaignTitle} placeholder="Campaign title"
                         	onChange={(event) => setCampaignTitle(event.target.value)}
                         />
-                        <label>Cast Intent 1</label>
+                        <label>Tag Line</label>
                     </div>
                 </div>
 
                 <div className="col-sm-6 col-12">
                     <div className="form-floating">
-                        <input className="form-control" type="text" value={campaignFID} placeholder="123"
-                        	onChange={(event) => setCampaignFID(event.target.value)}
+                        <input className="form-control" type="text" value={urlEmbed1} placeholder="123"
+                        	onChange={(event) => setUrlEmbed1(event.target.value)}
                         />
-                        <label>Cast Intent 2</label>
+                        <label>Embed</label>
                     </div>
                 </div>
 
@@ -428,13 +428,13 @@ const FileManager = () => {
 
                 <div className="col-md-6">
                     <div className="form-floating">
-                        <input className="form-control" type="text" value={urlEmbed1} placeholder="https://www.example.com"
+                        <input className="form-control" type="text" value={"https://frames.neynar.com/f/67b42b8d/69ae0817"} placeholder="https://www.example.com"
                             onChange={(event) => setUrlEmbed1(event.target.value)}
                         />
                         <label>Frame 1</label>
                     </div>
                 </div>
-                <div className="col-md-6">
+                {/* <div className="col-md-6">
                     <div className="form-floating">
                         <input className="form-control" type="text" value={tagLine1} placeholder="Yolo holidays"
                             onChange={(event) => setTagLine1(event.target.value)}
@@ -458,7 +458,7 @@ const FileManager = () => {
                         />
                         <label>Frame 4</label>
                     </div>
-                </div>
+                </div> */}
 
 
 
