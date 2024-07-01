@@ -35,7 +35,7 @@ Keepers Server side
 
 ## addresses of Smart Contracts
 
-Across all our repos there is a common file created in the HardHat repo called DeploymentData.json and holds the addresses our smart contracts are deployed on both Base and Sepolia
+Across all our repos there is a common file created in the HardHat repo called DeploymentData.json ( https://github.com/Entity54/OCS-SPARK-FE/blob/main/src/DeploymentData.json ) and holds the addresses our smart contracts are deployed on both Base and Sepolia
 
 Our protocol has four smart contracts
 
